@@ -134,6 +134,17 @@ class Emu_Marquee_Widget extends \Bricks\Element {
             ],
             'default' => 'left',
         ];
+        $this->controls['split-slider'] = [
+            'tab' => 'content',
+            'group' => 'settings',
+            'label' => esc_html__( 'Split Slider', 'bricks' ),
+            'type' => 'select',
+            'options' => [
+                'True' => esc_html__( 'true' , 'bricks' ),
+                'False' => esc_html__( 'false', 'bricks' ),
+            ],
+            'default' => 'false',
+        ];
     }
 
     // Render element HTML
@@ -184,7 +195,9 @@ class Emu_Marquee_Widget extends \Bricks\Element {
                             duration="' . esc_attr($this->settings['duration']) . '" 
                             border_radius="' . esc_attr($this->settings['border_radius']) . '" 
                             object_fit="' . esc_attr($this->settings['object_fit']) . '" 
-                            direction="' . esc_attr($this->settings['direction']) . '"]');
+                            direction="' . esc_attr($this->settings['direction']) . '" 
+                            split="' . esc_attr($this->settings['split-slider']) . '"]');
+                            
         echo '</div>';
 ;
     }
