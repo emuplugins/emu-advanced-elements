@@ -3,7 +3,7 @@
 if ( ! defined( 'ABSPATH' ) ) exit;
 
 // Include the file that contains the function to generate the marquee
-require_once plugin_dir_path( __FILE__ ) . 'includes/advanced-marquee.php'; // Correct file path
+require_once plugin_dir_path( __DIR__ ) . 'functions/advanced-marquee.php'; // Correct file path
 
 function emu_marquee_shortcode($atts) {
     // Define the default attributes for the shortcode
@@ -19,8 +19,14 @@ function emu_marquee_shortcode($atts) {
         'direction' => 'left'
     ), $atts);
 
-    // Convert the string of images to an array
-    $images = array_map('trim', explode(',', $atts['images']));
+    // Convert the images attribute to an array if it's a string
+    if (is_string($atts['images'])) {
+        $images = array_map('trim', explode(',', $atts['images']));
+    } elseif (is_array($atts['images'])) {
+        $images = $atts['images'];
+    } else {
+        $images = [];
+    }
 
     // Ensure there is at least one image
     if (empty($images) || $images[0] === '') {

@@ -27,7 +27,7 @@ if (is_admin()) {
 
 if ( ! is_admin() || ( is_admin() && isset($_GET['action']) && $_GET['action'] === 'edit' ) ) {
     // Functions and shortcodes
-    require_once plugin_dir_path(__FILE__) . '/shortcodes/advanced-marquee-shortcode.php';
+    require_once plugin_dir_path(__FILE__) . 'includes/shortcodes/advanced-marquee-shortcode.php';
     // Builders
-    require_once plugin_dir_path(__FILE__) . '/builders/bricks/elements-loader.php';
+    require_once plugin_dir_path(__FILE__) . 'builders/Bricks/elements-loader.php';
 }

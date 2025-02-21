@@ -1,89 +1,191 @@
-<?php 
+<?php
+if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 
-if ( ! defined('ABSPATH')) exit;
+class Emu_Marquee_Widget extends \Bricks\Element {
+    // Element properties
+    public $category     = 'general'; // Use predefined element category 'general'
+    public $name         = 'emu-marquee'; // Make sure to prefix your elements
+    public $icon         = 'ti-layout-slider'; // Themify icon font class
+    public $css_selector = '.emu-marquee-wrapper'; // Default CSS selector
 
-// Registra o widget no Bricks
-function emu_register_marquee_widget($widgets) {
-    $widgets[] = 'Emu_Marquee_Widget';
-    return $widgets;
-}
-add_filter('bricks/widgets', 'emu_register_marquee_widget');
-
-// Definir a classe do widget
-class Emu_Marquee_Widget extends \Bricks\Elements\Base {
-    public function get_name() {
-        return 'emu-marquee'; // Nome do widget
+    // Return localised element label
+    public function get_label() {
+        return esc_html__( 'Emu Marquee', 'bricks' );
     }
 
-    public function get_title() {
-        return 'Emu Marquee'; // Título que aparece no Bricks
+    // Set builder control groups
+    public function set_control_groups() {
+        $this->control_groups['settings'] = [
+            'title' => esc_html__( 'Settings', 'bricks' ),
+            'tab' => 'content',
+        ];
     }
 
+    // Set builder controls
+    public function set_controls() {
+            $this->controls['images'] = [
+            'tab' => 'content',
+            'group' => 'settings',
+			'rerender' => true,
+            'label' => esc_html__( 'Images', 'bricks' ),
+            'type' => 'image-gallery',
+            'default' => '',
+			'exclude'  => [
+				'size',
+			],
+        ];
+
+        $this->controls['width'] = [
+            'tab' => 'content',
+            'group' => 'settings',
+            'label' => esc_html__( 'Width', 'bricks' ),
+            'type' => 'number',
+            'default' => 300,
+			'unit' => 'px',
+			'css' => [
+        [
+          'property' => '--item-width',
+        ],
+      ],
+		'inline' => true,
+        ];
+
+        $this->controls['height'] = [
+            'tab' => 'content',
+            'group' => 'settings',
+            'label' => esc_html__( 'Height', 'bricks' ),
+            'type' => 'number',
+            'default' => 100,
+			'unit' => 'px',
+			'css' => [
+        [
+          'property' => '--item-height',
+        ],
+      ],
+		'inline' => true,
+        ];
+
+		$this->controls['gap'] = [
+            'tab' => 'content',
+            'group' => 'settings',
+            'label' => esc_html__( 'Space Between', 'bricks' ),
+            'type' => 'number',
+            'default' => 20,
+			'unit' => 'px',
+			'css' => [
+        [
+          'property' => '--item-gap',
+        ],
+      ],
+		'inline' => true,
+        ];
+
+        $this->controls['duration'] = [
+            'tab' => 'content',
+            'group' => 'settings',
+            'label' => esc_html__( 'Duration (seconds)', 'bricks' ),
+            'type' => 'number',
+            'default' => 90,
+			'unit' => 's',
+			'css' => [
+        [
+          'property' => '--animation-duration',
+        ],
+      ],
+		'inline' => true,
+        ];
+
+		 $this->controls['border_radius'] = [
+            'tab' => 'content',
+            'group' => 'settings',
+            'label' => esc_html__( 'Border Radius', 'bricks' ),
+            'type' => 'number',
+            'default' => 0,
+			 'unit' => 'px',
+			'css' => [
+        [
+          'property' => '--border-radius',
+        ],
+      ],
+		'inline' => true,
+        ];
+
+        $this->controls['object_fit'] = [
+            'tab' => 'content',
+            'group' => 'settings',
+            'label' => esc_html__( 'Object Fit', 'bricks' ),
+            'type' => 'select',
+            'options' => [
+                'cover' => esc_html__( 'Cover', 'bricks' ),
+                'contain' => esc_html__( 'Contain', 'bricks' ),
+                'fill' => esc_html__( 'Fill', 'bricks' ),
+            ],
+            'default' => 'cover',
+        ];
+
+        $this->controls['direction'] = [
+            'tab' => 'content',
+            'group' => 'settings',
+            'label' => esc_html__( 'Direction', 'bricks' ),
+            'type' => 'select',
+            'options' => [
+                'left' => esc_html__( 'Left', 'bricks' ),
+                'right' => esc_html__( 'Right', 'bricks' ),
+            ],
+            'default' => 'left',
+        ];
+    }
+
+    // Render element HTML
     public function render() {
-        // Pega os atributos do widget
-        $atts = $this->get_settings_for_display();
 
-        // Gera o HTML com o shortcode
-        echo do_shortcode('[emu_marquee id="' . esc_attr($atts['id']) . '" 
-                            images="' . esc_attr($atts['images']) . '" 
-                            width="' . esc_attr($atts['width']) . '" 
-                            height="' . esc_attr($atts['height']) . '" 
-                            gap="' . esc_attr($atts['gap']) . '" 
-                            duration="' . esc_attr($atts['duration']) . '" 
-                            border_radius="' . esc_attr($atts['border_radius']) . '" 
-                            object_fit="' . esc_attr($atts['object_fit']) . '" 
-                            direction="' . esc_attr($atts['direction']) . '"]');
-    }
+		if (isset($this->settings['images']['images'])) {
+			
+			$images2 = $this->settings['images']['images'];
 
-    public function get_settings() {
-        return array(
-            'id' => array(
-                'type' => 'text',
-                'label' => __('Marquee ID', 'emu'),
-                'default' => uniqid('emu_'),
-            ),
-            'images' => array(
-                'type' => 'textarea',
-                'label' => __('Images (comma separated)', 'emu'),
-                'default' => '',
-            ),
-            'width' => array(
-                'type' => 'number',
-                'label' => __('Width', 'emu'),
-                'default' => 300,
-            ),
-            'height' => array(
-                'type' => 'number',
-                'label' => __('Height', 'emu'),
-                'default' => 100,
-            ),
-            'gap' => array(
-                'type' => 'number',
-                'label' => __('Gap', 'emu'),
-                'default' => 30,
-            ),
-            'duration' => array(
-                'type' => 'number',
-                'label' => __('Duration (seconds)', 'emu'),
-                'default' => 90,
-            ),
-            'border_radius' => array(
-                'type' => 'number',
-                'label' => __('Border Radius', 'emu'),
-                'default' => 0,
-            ),
-            'object_fit' => array(
-                'type' => 'select',
-                'label' => __('Object Fit', 'emu'),
-                'default' => 'cover',
-                'options' => array('cover' => 'Cover', 'contain' => 'Contain', 'fill' => 'Fill'),
-            ),
-            'direction' => array(
-                'type' => 'select',
-                'label' => __('Direction', 'emu'),
-                'default' => 'left',
-                'options' => array('left' => 'Left', 'right' => 'Right'),
-            ),
-        );
+			if (is_array($images2)) {
+
+				$full_images = array_column($images2, 'full');
+				$full_images_string = implode(', ', $full_images); // Junta os valores separados por vírgula
+
+			} else {
+
+				$full_images_string = $images2;
+
+			}
+		}elseif (isset($this->settings['images']) && is_array($this->settings['images'])) {
+			
+				var_dump($this->settings['images']);
+			
+				$images2 = $this->settings['images'];
+
+				$full_images = array_column($images2, 'full');
+				$full_images_string = implode(', ', $full_images); // Junta os valores separados por vírgula
+
+			} else {
+
+				$full_images_string = '';
+
+			}
+
+		
+        $root_classes[] = 'emu-marquee-wrapper';
+
+        // Add 'class' attribute to element root tag
+        $this->set_attribute( '_root', 'class', $root_classes );
+
+        // Render element HTML
+        echo "<div {$this->render_attributes( '_root' )}>";
+        echo do_shortcode('[emu_marquee 
+                            images="' . esc_attr($full_images_string) . '" 
+                            width="' . esc_attr($this->settings['width']) . '" 
+                            height="' . esc_attr($this->settings['height']) . '" 
+                            gap="' . esc_attr($this->settings['gap']) . '" 
+                            duration="' . esc_attr($this->settings['duration']) . '" 
+                            border_radius="' . esc_attr($this->settings['border_radius']) . '" 
+                            object_fit="' . esc_attr($this->settings['object_fit']) . '" 
+                            direction="' . esc_attr($this->settings['direction']) . '"]');
+        echo '</div>';
+;
     }
 }
