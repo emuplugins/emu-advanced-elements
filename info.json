@@ -1,0 +1,15 @@
+{
+  "name": "Emu Advanced Elements",
+  "slug": "emu-advanced-elements",
+  "version": "1.0.1",
+  "download_url": "https://github.com/emuplugins/emu-advanced-elements/archive/refs/heads/main.zip",
+  "tested": "6.4",
+  "requires": "5.8",
+  "author": "Tonny",
+  "author_homepage": "https://angardagency.com",
+  "last_updated": "2025-02-21",
+  "sections": {
+    "description": "Nova versão do emu advanced elements com correções e melhorias.",
+    "changelog": "oi."
+  }
+}
