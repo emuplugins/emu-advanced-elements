@@ -61,7 +61,8 @@ $json_data = [
     "gap"         => $data['gap'] ?? '',
     "perMove"        => 1,
     "mediaQuery" => 'min',
-    "breakpoints" => $breakpoints
+    "breakpoints" => $breakpoints,
+    "lazyLoad" => true,
 ];
 
 // Adiciona perPage apenas se não houver breakpoints
@@ -80,7 +81,7 @@ echo json_encode($json_data, JSON_UNESCAPED_SLASHES);
             <ul class="splide__list">
                 <?php foreach ($images as $image) : ?>
                     <li class="splide__slide">
-                        <img src="<?php echo $image; ?>" alt="Imagem do slide" class="slide-image lightbox-enabled" data-imagesrc="<?php echo $image; ?>">
+                        <img src="<?php echo $image; ?>" alt="Imagem do slide" class="slide-image lightbox-enabled" data-imagesrc="<?php echo $image; ?>" data-splide-lazy="<?php echo $image; ?>">
                     </li>
                 <?php endforeach; ?>
             </ul>
