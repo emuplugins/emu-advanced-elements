@@ -218,6 +218,8 @@ echo json_encode($json_data, JSON_UNESCAPED_SLASHES);
         box-sizing: border-box;
     }
 </style>
+
+<script src="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.1.3/dist/js/splide.min.js"></script>
 <?php
 
 

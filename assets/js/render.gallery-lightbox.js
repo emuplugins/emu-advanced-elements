@@ -11,16 +11,21 @@ function splideAutoplay(s, p) {
         s.Components.Autoplay.play();
     }
 };
-
-document.addEventListener('DOMContentLoaded', function () {
+setTimeout(function() {
 
     if (emuSplide) {
-        emuSplide.destroy();  // Destrói a instância existente, se houver
+        emuSplide = null  // Destrói a instância existente, se houver
     }
     
-    emuSplide = new Splide('#emu-lightbox-gallery', {
-        // Suas opções aqui
-    }).mount();
+    if (typeof Splide !== 'undefined') {
+        let emuSplide = new Splide('#emu-lightbox-gallery', {
+            // Suas opções aqui
+        }).mount();
+    } else {
+        console.error('Splide não foi carregado corretamente.');
+    }
+    // 5000ms = 5 segundos de atraso
+    
 
     // query selectors
     const lightboxEnabled = document.querySelectorAll('.lightbox-enabled');
@@ -100,4 +105,5 @@ document.addEventListener('DOMContentLoaded', function () {
     lightboxBtnsWrapper.addEventListener('click', (e) =>{
         e.stopPropagation();
     })
-});
+
+}, 3000);
