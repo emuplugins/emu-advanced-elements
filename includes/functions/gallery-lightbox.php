@@ -110,6 +110,10 @@ echo json_encode($json_data, JSON_UNESCAPED_SLASHES);
 
 
 <style>
+
+    .emu-lightbox-container *, .emu-lightbox-gallery *{
+        user-select: none;
+    }
     .emu-lightbox-gallery .slide-image {
         width: 100%;
         height: 100%;
