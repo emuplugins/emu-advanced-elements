@@ -81,22 +81,25 @@ function emu_gallery_lightbox($images, $data){
 
 
 <style>
-    .slide-image {
+    .emu-lightbox-gallery .slide-image {
         width: 100%;
         height: 100%;
         display: block;
         object-fit: cover;
         transition:all.2s
     }
-    .splide__slide{
+    .emu-lightbox-gallery .splide{
+        max-width: 100%;
+    }
+    .emu-lightbox-gallery .splide__slide{
         overflow: hidden;
         cursor: pointer;
         height: auto;
     }
-    .slide-image:hover{
+    .emu-lightbox-gallery .slide-image:hover{
         transform: scale(1.05)
     }
-    .emu-lightbox-gallery{
+    .emu-lightbox-gallery .emu-lightbox-gallery{
         display: flex;
         justify-content: center;
         align-items: center;
@@ -114,6 +117,19 @@ function emu_gallery_lightbox($images, $data){
         align-items: center;
         top: 0;
     }
+    
+        .emu-lightbox-gallery .splide__arrow{
+            width:2em;
+            height: auto;
+            aspect-ratio: 1!important;
+            font-size:20px;
+    
+        }
+        .emu-lightbox-gallery .splide__pagination__page{
+            aspect-ratio: 1;
+            width:auto;
+            opacity: 1!important;
+        }
     .lightbox-image{
         width: 70vw;
         object-fit: cover;
@@ -131,19 +147,6 @@ function emu_gallery_lightbox($images, $data){
 
     .emu-lightbox-container.active{
         display: flex!important;
-    }
-
-    .splide__arrow{
-        width:2em;
-        height: auto;
-        aspect-ratio: 1!important;
-        font-size:20px;
-
-    }
-    .splide__pagination__page{
-        aspect-ratio: 1;
-        width:auto;
-        opacity: 1!important;
     }
 
     .lightbox-btns{
