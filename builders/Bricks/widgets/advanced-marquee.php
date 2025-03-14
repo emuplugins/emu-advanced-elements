@@ -3,7 +3,7 @@ if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 
 class Emu_Marquee_Widget extends \Bricks\Element {
     // Element properties
-    public $category     = 'general'; // Use predefined element category 'general'
+    public $category     = 'Emu Advanced Elements'; // Use predefined element category 'general'
     public $name         = 'emu-marquee'; // Make sure to prefix your elements
     public $icon         = 'ti-layout-slider'; // Themify icon font class
     public $css_selector = '.emu-marquee-wrapper'; // Default CSS selector

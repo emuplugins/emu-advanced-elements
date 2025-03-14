@@ -1,6 +1,6 @@
 <?php
 
-if (!defined('ABSPATH')) exit;
+if ( ! defined('ABSPATH')) exit;
 
 require_once plugin_dir_path(__DIR__) . 'functions/advanced-marquee.php'; // Certifique-se de que o caminho está correto
 

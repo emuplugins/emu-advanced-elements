@@ -7,12 +7,21 @@ if ( ! defined('ABSPATH')) exit;
 
     // Registra o elemento personalizado
     add_action( 'init', function() {
-        $element_files = [
-            plugin_dir_path( __FILE__ ) . 'widgets/advanced-marquee.php', // Caminho completo do arquivo do seu elemento
+        $elements = [
+            [
+                'slug' => 'emu-marquee',
+                'class' => 'Emu_Marquee_Widget',
+                'file' => 'widgets/advanced-marquee.php'
+            ],
+            [
+                'slug' => 'emu-gallery-lightbox',
+                'class' => 'Emu_Gallery_Lightbox',
+                'file' => 'widgets/gallery-lightbox.php'
+            ]
         ];
 
-        foreach ( $element_files as $file ) {
+        foreach ( $elements as $element ) {
             // Registra o elemento passando o caminho completo do arquivo
-            \Bricks\Elements::register_element( $file, 'emu-marquee', 'Emu_Marquee_Widget' );
+            \Bricks\Elements::register_element( (plugin_dir_path( __FILE__ ).$element['file'] ), $element['slug'], $element['class'] );
         }
     }, 11 );
