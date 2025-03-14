@@ -1,4 +1,5 @@
 <?php
+use Bricks\Helpers;
 
 if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 
@@ -410,21 +411,31 @@ class Emu_Gallery_Lightbox extends \Bricks\Element {
     // Render element HTML
     public function render() {
 
+    // Gerar as opções de breakpoint
+    $breakpoint_options = Helpers::generate_swiper_breakpoint_data_options( $this->settings );
+
+    // Verificar se há breakpoints e aplicar as opções
+    if ( count( $breakpoint_options ) > 1 ) {
+        // Remover 'slidesToShow' do array de opções
+        unset( $this->settings['slidesToShow'] );
+        // Adicionar as opções de breakpoints
+        $this->settings['breakpoints'] = json_encode($breakpoint_options);
+    }
+
+    // Lógica para tratar as imagens
     if (isset($this->settings['images']['images'])) {
 
-    $images2 = $this->settings['images']['images'];
+        $images2 = $this->settings['images']['images'];
 
-    if (is_array($images2)) {
+        if (is_array($images2)) {
+            $full_images = array_column($images2, 'full');
+            $full_images_string = implode(', ', $full_images); // Junta os valores separados por vírgula
 
-        $full_images = array_column($images2, 'full');
-        $full_images_string = implode(', ', $full_images); // Junta os valores separados por vírgula
+        } else {
+            $full_images_string = $images2;
+        }
 
-    } else {
-
-        $full_images_string = $images2;
-
-    }
-    }elseif (isset($this->settings['images']) && is_array($this->settings['images'])) {
+    } elseif (isset($this->settings['images']) && is_array($this->settings['images'])) {
 
         var_dump($this->settings['images']);
 
@@ -434,28 +445,27 @@ class Emu_Gallery_Lightbox extends \Bricks\Element {
         $full_images_string = implode(', ', $full_images); // Junta os valores separados por vírgula
 
     } else {
-
         $full_images_string = '';
-
     }
 
-    // Add 'class' attribute to element root tag
+    // Adiciona a classe ao elemento root
     $this->set_attribute( '_root', 'class', 'emu-gallery-lightbox' );
 
-    // Render element HTML
+    // Renderiza o HTML do elemento
     echo "<div {$this->render_attributes( '_root' )}>" ;
-    
-    echo do_shortcode('[emu_gallery_lightbox images="' .
-    esc_attr($full_images_string) .
-    '" type="' . esc_attr($this->settings['type'] ?? 'loop') .
-    '" perpage="' . esc_attr($this->settings['slidesToShow'] ?? '4') .
-    '" autoplay="' . esc_attr($this->settings['autoplay'] ?? 'true') .
-    '" gap="' . esc_attr(isset($this->settings['gap']) ? $this->settings['gap'] . 'px' : '20px') . '" ]');
 
-                        
+    // Renderiza o shortcode com os parâmetros necessários
+    echo do_shortcode('[emu_gallery_lightbox images="' .
+        esc_attr($full_images_string) .
+        '" type="' . esc_attr($this->settings['type'] ?? 'loop') .
+        '" perpage="' . esc_attr($this->settings['slidesToShow'] ?? '4') .
+        '" autoplay="' . esc_attr($this->settings['autoplay'] ?? 'true') .
+        '" gap="' . esc_attr(isset($this->settings['gap']) ? $this->settings['gap'] . 'px' : '20px') . 
+        '" breakpoints="' . esc_attr($this->settings['breakpoints'] ?? '') . '" ]');
+
     echo '</div>';
-    
-    }
+}
+
 
 
 }

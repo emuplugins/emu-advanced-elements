@@ -22,6 +22,7 @@ function emu_gallery_lightbox($images, $data){
 //     'drag' => false,
 // ];
 
+
 ?>
 
 <!-- splide css -->
@@ -31,20 +32,48 @@ function emu_gallery_lightbox($images, $data){
 
     <div class="splide" id="emu-lightbox-gallery"  data-splide='<?php
     
-    // Construindo o JSON baseado no $data
-    echo json_encode([
-        "type" => $data['type'],
-        "perPage" => (int) $data['perpage'],
-        "autoplay" => filter_var($data['autoplay'], FILTER_VALIDATE_BOOLEAN),
-        "interval" => (int) $data['interval'],
-        "arrows" => filter_var($data['arrows'], FILTER_VALIDATE_BOOLEAN),
-        "pagination" => filter_var($data['pagination'], FILTER_VALIDATE_BOOLEAN),
-        "autoHeight" => filter_var($data['autoHeight'], FILTER_VALIDATE_BOOLEAN),
-        "drag" => filter_var($data['drag'], FILTER_VALIDATE_BOOLEAN),
-        "gap" => $data['gap'] ?? ''
-    ]);
+    
+// Processamento dos breakpoints
+$breakpoints = [];
+if (!empty($data['breakpoints'])) {
+    $data = str_replace('slidesPerView', 'perPage', $data);
+    $processed = json_decode(html_entity_decode($data['breakpoints']), true);
+    if (is_string($processed)) {
+        $processed = json_decode($processed, true);
+    }
+    
+    
+    
+    $breakpoints = $processed;
+}
+
+// $breakpoints =  json_decode('{"992":{"perPage":4},"479":{"perPage":2}}', true);
+
+// Construção do JSON final
+$json_data = [
+    "type"        => $data['type'],
+    "autoplay"    => filter_var($data['autoplay'], FILTER_VALIDATE_BOOL),
+    "interval"    => (int) $data['interval'],
+    "arrows"      => filter_var($data['arrows'], FILTER_VALIDATE_BOOL),
+    "pagination"  => filter_var($data['pagination'], FILTER_VALIDATE_BOOL),
+    "autoHeight"  => filter_var($data['autoHeight'], FILTER_VALIDATE_BOOL),
+    "drag"        => filter_var($data['drag'], FILTER_VALIDATE_BOOL),
+    "gap"         => $data['gap'] ?? '',
+    "move"        => 1,
+    "mediaQuery" => 'min',
+    "breakpoints" => $breakpoints
+];
+
+// Adiciona perPage apenas se não houver breakpoints
+if (empty($breakpoints) && isset($data['perpage'])) {
+    $json_data['perPage'] = (int) $data['perpage'];
+}
+
+echo json_encode($json_data, JSON_UNESCAPED_SLASHES);
 
     ?>'>
+
+
  
         <div class="splide__track">
 

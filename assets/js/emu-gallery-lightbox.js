@@ -12,7 +12,8 @@ function splideAutoplay(s, p) {
 document.addEventListener('DOMContentLoaded', function () {
 
     const emuSplide = new Splide('#emu-lightbox-gallery', {
-    }).mount(); 
+    }).mount();
+    
 
     // query selectors
     const lightboxEnabled = document.querySelectorAll('.lightbox-enabled');

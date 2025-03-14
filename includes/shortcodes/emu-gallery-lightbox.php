@@ -18,7 +18,9 @@ $data = shortcode_atts(
     'autoHeight' => true,
     'drag' => false,
     'gap' => '10px',
+    'breakpoints' => NULL,
 ], $data);
+
 
 // recuperando as imagens
 $images = $data['images'];
