@@ -58,10 +58,10 @@ class Emu_Gallery_Lightbox extends \Bricks\Element {
         // $this->controls['gutter']                       = $swiper_controls['gutter'];
 
         $this->controls['height']                       = $swiper_controls['height'];
-        $this->controls['height']['label']              = esc_html__( 'Min. height', 'bricks' );
+        $this->controls['height']['label']              = esc_html__( 'Images height', 'bricks' );
         $this->controls['height']['placeholder']        = '400px';
         $this->controls['height']['css'][0]['property'] = 'height';
-        $this->controls['height']['css'][0]['selector'] = '.emu-lightbox-gallery,.splide__list';
+        $this->controls['height']['css'][0]['selector'] = '.emu-lightbox-gallery,.splide__list, .splide__track';
         $this->controls['height']['default'] = 400;
 
         // $this->controls['effect']                       = $swiper_controls['effect'];
