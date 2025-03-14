@@ -59,7 +59,7 @@ $json_data = [
     "autoHeight"  => filter_var($data['autoHeight'], FILTER_VALIDATE_BOOL),
     "drag"        => filter_var($data['drag'], FILTER_VALIDATE_BOOL),
     "gap"         => $data['gap'] ?? '',
-    "move"        => 1,
+    "perMove"        => 1,
     "mediaQuery" => 'min',
     "breakpoints" => $breakpoints
 ];
