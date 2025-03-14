@@ -394,7 +394,7 @@ class Emu_Gallery_Lightbox extends \Bricks\Element {
 
         wp_enqueue_script(
             'emuSplide', // Handle do script
-            PLUGIN_URL . 'assets/js/render.gallery-lightbox.js', // Caminho do script
+            PLUGIN_URL . 'assets/js/emu-gallery-lightbox.js', // Caminho do script
             '', // Dependências (se houver)
             '', // Versão
             true // Carregar no footer

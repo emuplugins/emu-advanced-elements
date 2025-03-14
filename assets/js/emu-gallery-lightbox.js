@@ -1,7 +1,4 @@
-let emuSplide;  // Declara a variável fora da função para que ela seja acessível
-// 
-// 
-// // nome do splide e funcao pause ou play
+// nome do splide e funcao pause ou play
 function splideAutoplay(s, p) {
     if (p == 'pause'){
         s.Components.Autoplay.pause();
@@ -14,13 +11,9 @@ function splideAutoplay(s, p) {
 
 document.addEventListener('DOMContentLoaded', function () {
 
-    if (emuSplide) {
-        emuSplide.destroy();  // Destrói a instância existente, se houver
-    }
-    
-    emuSplide = new Splide('#emu-lightbox-gallery', {
-        // Suas opções aqui
+    const emuSplide = new Splide('#emu-lightbox-gallery', {
     }).mount();
+    
 
     // query selectors
     const lightboxEnabled = document.querySelectorAll('.lightbox-enabled');
