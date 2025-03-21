@@ -550,6 +550,25 @@ class EmuSliderElementor extends \Elementor\Widget_Base {
                 ]
             );
 
+            $this->add_responsive_control(
+                'slider_container_width',
+                [
+                    'type' => \Elementor\Controls_Manager::SLIDER,
+                    'label' => esc_html__( 'Width', 'textdomain' ),
+                    'range' => [
+                        'px' => [
+                            'min' => 300,
+                            'max' => 1920,
+                        ],
+                    ],
+                    'selectors' => [
+                        '{{WRAPPER}} .emu-splide-content-session' => 'width: {{SIZE}}{{UNIT}};',
+                    ],
+                ]
+            );
+
+            
+
 
             $this->add_responsive_control(
                 'slider_padding',
@@ -589,7 +608,7 @@ class EmuSliderElementor extends \Elementor\Widget_Base {
                 'slider_width',
                 [
                     'type' => \Elementor\Controls_Manager::SLIDER,
-                    'label' => esc_html__( 'Width', 'textdomain' ),
+                    'label' => esc_html__( 'Items container width', 'textdomain' ),
                     'range' => [
                         'px' => [
                             'min' => 300,
@@ -597,7 +616,33 @@ class EmuSliderElementor extends \Elementor\Widget_Base {
                         ],
                     ],
                     'selectors' => [
-                        '{{WRAPPER}} .emu-splide-wrapper' => '--content-width: {{SIZE}}{{UNIT}};',
+                        '{{WRAPPER}} .emu-splide-content' => 'width: {{SIZE}}{{UNIT}};',
+                    ],
+                ]
+            );
+
+            $this->add_control(
+                'items_container_align',
+                [
+                    'label' => esc_html__( 'Container alignment', 'textdomain' ),
+                    'type' => \Elementor\Controls_Manager::CHOOSE,
+                    'options' => [
+                        'left' => [
+                            'title' => esc_html__( 'Left', 'textdomain' ),
+                            'icon' => 'eicon-text-align-left',
+                        ],
+                        'center' => [
+                            'title' => esc_html__( 'Center', 'textdomain' ),
+                            'icon' => 'eicon-text-align-center',
+                        ],
+                        'right' => [
+                            'title' => esc_html__( 'Right', 'textdomain' ),
+                            'icon' => 'eicon-text-align-right',
+                        ],
+                    ],
+                    'toggle' => true,
+                    'selectors' => [
+                        '{{WRAPPER}} .emu-slide-logo, {{WRAPPER}} .emu-splide-content-session' => 'justify-content: {{VALUE}};',
                     ],
                 ]
             );
@@ -1360,6 +1405,7 @@ class EmuSliderElementor extends \Elementor\Widget_Base {
                                             }
                                             ?>
         
+                                            <div class="emu-splide-content-session">
                                             <div class="emu-splide-content">
 
                                             <?php if (!empty($slide['logo'])): ?>
@@ -1379,6 +1425,7 @@ class EmuSliderElementor extends \Elementor\Widget_Base {
                                                     echo '<a href="' . $slide['button_link'] . '" class="emu-splide-button">' . $slide['button_text'] . '</a>';
                                                 }
                                                 ?>
+                                            </div>
                                             </div>
                                         </div>
                                     </li>
@@ -1474,6 +1521,7 @@ class EmuSliderElementor extends \Elementor\Widget_Base {
                         ></a>
                     <# } #>
 
+                    <div class="emu-splide-content-session">
                     <div class="emu-splide-content">
 
                         <# if ( slide.logo ) { #>
@@ -1491,6 +1539,7 @@ class EmuSliderElementor extends \Elementor\Widget_Base {
                         <# if ( slide.button_text ) { #>
                             <a href="{{ slide.button_link }}" class="emu-splide-button">{{ slide.button_text }}</a>
                         <# } #>
+                    </div>
                     </div>
                 </div>
             </li>

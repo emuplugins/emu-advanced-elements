@@ -28,6 +28,15 @@
     transform: none!important;
 }
 
+.emu-splide-content-session{
+    display: flex;
+    gap:0;
+    border:dashed 2px rgba(0, 0, 0, 0);
+    transition:border 0.2s;
+    z-index: 1;
+    padding:7px
+}
+
 /* Cada arrow */
 .emu-splide-wrapper .splide__arrow--next{
     right:0;
@@ -97,7 +106,6 @@
 .emu-splide-content{
     width: var(--content-width);
     max-width: 90%;
-    margin: 0 auto;
     border:dashed 2px rgba(99, 163, 179, 0);
     padding:10px;
     height: var(--content-height);
@@ -112,14 +120,12 @@
     display: flex;
     flex-direction: column;
     gap:10px;
-    transition:border 0.4s;
+    transition:border 0.2s;
     
 }
 
-.elementor-editor-active .emu-splide-wrapper:hover .emu-splide-content{
-
-    border:dashed 2px rgba(99, 163, 179, 0.54);
-
+.elementor-element-editable .emu-splide-content, .elementor-element-editable .emu-splide-content-session{
+    border:dashed 2px rgba(99, 163, 179, 0.356);
 }
 
 .emu-splide-html-wrapper{
