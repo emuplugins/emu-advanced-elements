@@ -77,7 +77,10 @@ class EmuSliderElementor extends \Elementor\Widget_Base {
             'bg_desktop',
                 [
                     'type' => \Elementor\Controls_Manager::MEDIA,
-                ]
+                    'dynamic' => [
+                    'active' => true,
+                    ],
+                ],
             );
 
             $repeater->end_controls_tab();
@@ -93,6 +96,9 @@ class EmuSliderElementor extends \Elementor\Widget_Base {
             'bg_tablet',
                 [
                     'type' => \Elementor\Controls_Manager::MEDIA,
+                    'dynamic' => [
+                    'active' => true,
+                    ],
                 ]
             );
             $repeater->end_controls_tab();
@@ -108,6 +114,9 @@ class EmuSliderElementor extends \Elementor\Widget_Base {
             'bg_mobile',
                 [
                     'type' => \Elementor\Controls_Manager::MEDIA,
+                    'dynamic' => [
+                    'active' => true,
+                    ],
                 ]
             );
             
@@ -116,6 +125,17 @@ class EmuSliderElementor extends \Elementor\Widget_Base {
             $repeater->end_controls_tabs();
 
             // IMAGE TABS>
+
+            $repeater->start_controls_tabs(
+                'repeater_contents'
+            );
+
+            $repeater->start_controls_tab(
+                'repeater_general',
+                [
+                    'label' => esc_html__( 'General', 'textdomain' ),
+                ]
+            );
 
             $repeater->add_control(
                 'title',
@@ -131,18 +151,9 @@ class EmuSliderElementor extends \Elementor\Widget_Base {
                 'link',
                 [
                     'label' => esc_html__( 'Link', 'textdomain' ),
-                    'type' => \Elementor\Controls_Manager::TEXT,
+                    'type' => \Elementor\Controls_Manager::URL,
+                    'options' => [ 'url', 'is_external', 'nofollow' ],
                     'label_block' => true,
-                ]
-            );
-            
-            $repeater->add_control(
-                'content',
-                [
-                    'label' => esc_html__( 'Content', 'textdomain' ),
-                    'type' => \Elementor\Controls_Manager::WYSIWYG,
-                    'default' => esc_html__( 'List Content' , 'textdomain' ),
-                    'show_label' => false,
                     ]
                 );
                 
@@ -159,11 +170,37 @@ class EmuSliderElementor extends \Elementor\Widget_Base {
                 'button_link',
                 [
                     'label' => esc_html__( 'Button Link', 'textdomain' ),
-                    'type' => \Elementor\Controls_Manager::TEXT,
-                    'default' => esc_html__( '#' , 'textdomain' ),
+                    'type' => \Elementor\Controls_Manager::URL,
+                    'options' => [ 'url', 'is_external', 'nofollow' ],
                     'label_block' => true,
                 ]
             );
+
+            $repeater->end_controls_tab();
+
+            $repeater->start_controls_tab(
+                'repeater_content',
+                [
+                    'label' => esc_html__( 'Content', 'textdomain' ),
+                ]
+            );
+
+            $repeater->add_control(
+            'content',
+            [
+                'label' => esc_html__( 'Content', 'textdomain' ),
+                'type' => \Elementor\Controls_Manager::WYSIWYG,
+                'default' => esc_html__( 'List Content' , 'textdomain' ),
+                'show_label' => false,
+                ]
+            );
+
+            $repeater->end_controls_tab();
+
+            $repeater->end_controls_tabs();
+
+            
+                
     
             $this->add_control(
                 'list',
@@ -186,6 +223,24 @@ class EmuSliderElementor extends \Elementor\Widget_Base {
             );
     
             $this->end_controls_section();
+            // configurações do slider
+
+
+            $this->start_controls_section(
+                'content_section',
+                [
+                    'label' => esc_html__( 'Slider options', 'textdomain' ),
+                    'tab' => \Elementor\Controls_Manager::TAB_CONTENT,
+                ]
+            );
+            
+
+            $this->end_controls_section();
+
+
+
+
+            // estilos
 
             $this->start_controls_section(
                 'style_section',
@@ -427,7 +482,26 @@ class EmuSliderElementor extends \Elementor\Widget_Base {
                     ],
                 ]
             );
-    
+            
+            $this->add_group_control(
+            \Elementor\Group_Control_Border::get_type(),
+            [
+                'name' => 'button_border',
+                'selector' => '{{WRAPPER}} .emu-splide-button',
+                ]
+            );
+
+            $this->add_responsive_control(
+                'button_border_radius',
+                [
+                    'type' => \Elementor\Controls_Manager::DIMENSIONS,
+                    'label' => esc_html__( 'Border Radius', 'textdomain' ),
+                    'size_units' => [ 'px', '%', 'em', 'rem', 'custom' ],
+                    'selectors' => [
+                        '{{WRAPPER}} .emu-splide-button' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+                    ],
+                ]
+            );
 
             $this->end_controls_tab();
 
@@ -513,8 +587,196 @@ class EmuSliderElementor extends \Elementor\Widget_Base {
                     'type' => \Elementor\Controls_Manager::SLIDER,
                     'label' => esc_html__( 'Position', 'textdomain' ),
                     'size_units' => [ 'px', '%', 'vh', 'vw', 'custom' ],
+                    'range' => [
+                        'px'=> [
+                            'min' => -100,
+                            'max' => 450,
+                        ],
+                    ],
                     'selectors' => [
                         '{{WRAPPER}} .emu-splide-wrapper .splide__arrow' => 'top: calc({{SIZE}}{{UNIT}} + var(--slide-padding));',
+                    ],
+                ]
+            );
+            $this->add_responsive_control(
+                'arrows_space',
+                [
+                    'type' => \Elementor\Controls_Manager::SLIDER,
+                    'label' => esc_html__( 'Space between', 'textdomain' ),
+                    'size_units' => [ 'px', '%', 'vh', 'vw', 'custom' ],
+                    'range' => [
+                        'px'=> [
+                            'min' => -100,
+                            'max' => 450,
+                        ],
+                    ],
+                    'selectors' => [
+                        '{{WRAPPER}} .emu-splide-wrapper .splide__arrows' => 'width: calc({{SIZE}}{{UNIT}} + 80px);',
+                    ],
+                ]
+            );
+            $this->add_responsive_control(
+                'arrows_size',
+                [
+                    'type' => \Elementor\Controls_Manager::SLIDER,
+                    'label' => esc_html__( 'Arrows size', 'textdomain' ),
+                    'size_units' => [ 'px', '%', 'vh', 'vw', 'custom' ],
+                    'range' => [
+                        'px'=> [
+                            'min' => 10,
+                            'max' => 40,
+                        ],
+                    ],
+                    'selectors' => [
+                        '{{WRAPPER}} .emu-splide-wrapper .splide__arrow' => 'font-size:{{SIZE}}{{UNIT}};',
+                    ],
+                ]
+            );
+
+            $this->add_control(
+                'arrow_color',
+            [
+                'label' => esc_html__( 'Color', 'textdomain' ),
+                'type' => \Elementor\Controls_Manager::COLOR,
+                'selectors' => [
+                    '{{WRAPPER}} .splide__arrow svg' => 'fill: {{VALUE}}'
+                ],
+            ]
+            );
+
+            $this->add_control(
+                'arrow_background',
+            [
+                'label' => esc_html__( 'Background Color', 'textdomain' ),
+                'type' => \Elementor\Controls_Manager::COLOR,
+                'selectors' => [
+                    '{{WRAPPER}} .splide__arrow' => 'background-color: {{VALUE}}'
+                ],
+            ]
+            );
+
+            $this->add_group_control(
+                \Elementor\Group_Control_Border::get_type(),
+                [
+                    'name' => 'arrows_border',
+                    'selector' => '{{WRAPPER}} .splide__arrow',
+                ]
+            );
+
+            $this->add_responsive_control(
+                'arrows_border_radius',
+                [
+                    'type' => \Elementor\Controls_Manager::DIMENSIONS,
+                    'label' => esc_html__( 'Border Radius', 'textdomain' ),
+                    'size_units' => [ 'px', '%', 'em', 'rem', 'custom' ],
+                    'selectors' => [
+                        '{{WRAPPER}} .splide__arrow' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+                    ],
+                ]
+            );
+            
+            $this->end_controls_section();
+            
+            // Pagination
+
+            $this->start_controls_section(
+                'pagination_styles',
+                [
+                    'label' => esc_html__( 'Pagination', 'textdomain' ),
+                    'tab' => \Elementor\Controls_Manager::TAB_STYLE,
+                ]
+            );
+
+            $this->add_responsive_control(
+                'pagination_position',
+                [
+                    'type' => \Elementor\Controls_Manager::SLIDER,
+                    'label' => esc_html__( 'Position', 'textdomain' ),
+                    'size_units' => [ 'px', '%', 'vh', 'vw', 'custom' ],
+                    'range' => [
+                        'px'=> [
+                            'min' => -100,
+                            'max' => 450,
+                        ],
+                    ],
+                    'selectors' => [
+                        '{{WRAPPER}} .emu-splide-wrapper .splide__pagination' => 'bottom:{{SIZE}}{{UNIT}};',
+                    ],
+                ]
+            );
+            $this->add_responsive_control(
+                'pagination_space',
+                [
+                    'type' => \Elementor\Controls_Manager::SLIDER,
+                    'label' => esc_html__( 'Space between', 'textdomain' ),
+                    'size_units' => [ 'px', '%', 'vh', 'vw', 'custom' ],
+                    'range' => [
+                        'px'=> [
+                            'min' => -100,
+                            'max' => 450,
+                        ],
+                    ],
+                    'selectors' => [
+                        '{{WRAPPER}} .emu-splide-wrapper .splide__pagination' => 'gap: {{SIZE}}{{UNIT}};',
+                    ],
+                ]
+            );
+            $this->add_responsive_control(
+                'pagination_size',
+                [
+                    'type' => \Elementor\Controls_Manager::SLIDER,
+                    'label' => esc_html__( 'Pagination size', 'textdomain' ),
+                    'size_units' => [ 'px', '%', 'vh', 'vw', 'custom' ],
+                    'range' => [
+                        'px'=> [
+                            'min' => 10,
+                            'max' => 40,
+                        ],
+                    ],
+                    'selectors' => [
+                        '{{WRAPPER}} .emu-splide-wrapper .splide__pagination__page' => 'width:{{SIZE}}{{UNIT}};',
+                    ],
+                ]
+            );
+
+            $this->add_control(
+                'pagination_color',
+            [
+                'label' => esc_html__( 'Color', 'textdomain' ),
+                'type' => \Elementor\Controls_Manager::COLOR,
+                'selectors' => [
+                    '{{WRAPPER}} .splide__pagination__page' => 'background-color: {{VALUE}}'
+                ],
+            ]
+            );
+
+            $this->add_control(
+                'pagination_active_color',
+            [
+                'label' => esc_html__( 'Active Color', 'textdomain' ),
+                'type' => \Elementor\Controls_Manager::COLOR,
+                'selectors' => [
+                    '{{WRAPPER}} .splide__pagination__page.is-active' => 'background-color: {{VALUE}}'
+                ],
+            ]
+            );
+
+            $this->add_group_control(
+                \Elementor\Group_Control_Border::get_type(),
+                [
+                    'name' => 'arrows_border',
+                    'selector' => '{{WRAPPER}} .splide__arrow',
+                ]
+            );
+
+            $this->add_responsive_control(
+                'arrows_border_radius',
+                [
+                    'type' => \Elementor\Controls_Manager::DIMENSIONS,
+                    'label' => esc_html__( 'Border Radius', 'textdomain' ),
+                    'size_units' => [ 'px', '%', 'em', 'rem', 'custom' ],
+                    'selectors' => [
+                        '{{WRAPPER}} .splide__arrow' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
                     ],
                 ]
             );
@@ -568,8 +830,23 @@ class EmuSliderElementor extends \Elementor\Widget_Base {
                                             </picture>
         
                                             <?php
+                                            // Verificando se o link está definido
                                             if (!empty($slide['link'])) {
-                                                echo '<a href="' . $slide['link'] . '" class="slide-link"></a>';
+
+                                            // Gerar o HTML do link
+                                            echo '<a href="' . $slide['url'] . '" class="slide-link"';
+
+                                            // Adicionar o atributo target se 'is_external' for verdadeiro
+                                            if ($slide['is_external']) {
+                                                echo ' target="_blank"';
+                                            }
+
+                                            // Adicionar o atributo rel se 'nofollow' for verdadeiro
+                                            if ($slide['nofollow']) {
+                                                echo ' rel="nofollow"';
+                                            }
+
+                                            echo '></a>';
                                             }
                                             ?>
         
@@ -632,9 +909,13 @@ class EmuSliderElementor extends \Elementor\Widget_Base {
                                                 <# } #>
                                             </picture>
         
-                                            <# if ( slide.link ) { #>
-                                                <a href="{{{ slide.link }}}" class="slide-link"></a>
-                                            <# } #>
+                                            <# if (slide.link) { #>
+                                            <a href="{{{ slide.url }}}" class="slide-link"
+                                                <# if (slide.is_external) { #> target="_blank" <# } #>
+                                                <# if (slide.nofollow) { #> rel="nofollow" <# } #>
+                                            ></a>
+                                        <# } #>
+
         
                                             <div class="emu-splide-content">
                                                 <# if ( slide.title ) { #>
