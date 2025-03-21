@@ -1,5 +1,7 @@
 <?php
 
+if ( ! defined('ABSPATH') ) exit;
+
 function emu_generate_marquee($id = null, $images = array(), $width = 300, $height = 100, $gap = 30, $duration = 90, $border_radius = 0, $object_fit = 'cover', $direction = 'left', $split_carousel = false) {
     
     static $emu_counter = 0;

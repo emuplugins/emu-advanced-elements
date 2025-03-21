@@ -1,5 +1,7 @@
 <?php
 
+if ( ! defined('ABSPATH') ) exit;
+
 class EmuSliderElementor extends \Elementor\Widget_Base {
 
 

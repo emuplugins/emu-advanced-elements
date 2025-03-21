@@ -1,5 +1,7 @@
 <?php
 
+if ( ! defined('ABSPATH') ) exit;
+
 function emu_gallery_lightbox($images, $data){
 
 // exemplo de uso

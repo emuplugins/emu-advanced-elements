@@ -13,11 +13,11 @@ if ( class_exists( 'Bricks\Elements' ) ) {
                 'class' => 'Emu_Marquee_Widget',
                 'file' => 'widgets/advanced-marquee.php'
             ],
-            [
-                'slug' => 'emu-gallery-lightbox',
-                'class' => 'Emu_Gallery_Lightbox',
-                'file' => 'widgets/gallery-lightbox.php'
-            ]
+            // [
+            //     'slug' => 'emu-gallery-lightbox',
+            //     'class' => 'Emu_Gallery_Lightbox',
+            //     'file' => 'widgets/gallery-lightbox.php'
+            // ]
         ];
 
         foreach ( $elements as $element ) {
