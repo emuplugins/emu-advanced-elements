@@ -6,8 +6,12 @@
     --content-width: 1200px;
     --slide-padding: 40px;
     --content-bg-color:rgba(0, 0, 0, 0.5);
-    user-select: none;
+
     font-size:20px
+}
+
+.emu-splide-wrapper img{
+    user-select: none;
 }
 
 .emu-splide-wrapper .splide__arrows{
