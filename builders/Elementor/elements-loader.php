@@ -16,16 +16,31 @@ add_action( 'elementor/widgets/register', 'emuSlideElementor' );
 
 function emuEnqueueScripts() {
 
-	wp_register_script('splidePackage', plugins_url('emu-advanced-elements/assets/js/packages/splide.js', EAE_PLUGIN_DIR));
+    // Script de JavaScript do Splide
+    wp_register_script('splidePackage', plugins_url('emu-advanced-elements/assets/js/packages/splide.js', EAE_PLUGIN_DIR));
 
-	wp_register_style('splideCSS', 'https://cdn.jsdelivr.net/npm/@splidejs/splide@latest/dist/css/splide.min.css');
-	
-	wp_register_style('emuSplideStyle', plugins_url('emu-advanced-elements/assets/css/widgets/emu-slider/emu-splide.css', EAE_PLUGIN_DIR));
-	
-	wp_register_script('splideStarter', plugins_url('emu-advanced-elements/assets/js/widgets/slider/splide.js', EAE_PLUGIN_DIR));
+    // Estilo do Splide com versão dinâmica (evitando cache)
+    wp_register_style(
+        'splideCSS', 
+        'https://cdn.jsdelivr.net/npm/@splidejs/splide@latest/dist/css/splide.min.css', 
+        array(), 
+        time()  // Adiciona a versão dinâmica
+    );
+    
+    // Estilo personalizado do Splide com versão dinâmica (evitando cache)
+    wp_register_style(
+        'emuSplideStyle', 
+        plugins_url('emu-advanced-elements/assets/css/widgets/emu-slider/emu-splide.css', EAE_PLUGIN_DIR),
+        array(),
+        time()  // Adiciona a versão dinâmica
+    );
+    
+    // Script starter do Splide
+    wp_register_script('splideStarter', plugins_url('emu-advanced-elements/assets/js/widgets/slider/splide.js', EAE_PLUGIN_DIR));
 }
 
 add_action('wp_enqueue_scripts', 'emuEnqueueScripts');
+
 
 // ==============================
 
