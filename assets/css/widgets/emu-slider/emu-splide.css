@@ -24,7 +24,8 @@
     background-color: white;
     opacity: 1;
     font-size: 1em;
-    padding: 0 !important;;
+    padding: 0 !important;
+    transform: none!important;
 }
 
 /* Cada arrow */

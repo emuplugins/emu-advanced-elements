@@ -1189,6 +1189,7 @@ class EmuSliderElementor extends \Elementor\Widget_Base {
                     ],
                 ]
             );
+            
 
             $this->add_control(
                 'pagination_color',
@@ -1215,19 +1216,19 @@ class EmuSliderElementor extends \Elementor\Widget_Base {
             $this->add_group_control(
                 \Elementor\Group_Control_Border::get_type(),
                 [
-                    'name' => 'arrows_border',
-                    'selector' => '{{WRAPPER}} .splide__arrow',
+                    'name' => 'pagination_border',
+                    'selector' => '{{WRAPPER}} .splide__pagination__page',
                 ]
             );
 
             $this->add_responsive_control(
-                'arrows_border_radius',
+                'pagination_border_radius',
                 [
                     'type' => \Elementor\Controls_Manager::DIMENSIONS,
                     'label' => esc_html__( 'Border Radius', 'textdomain' ),
                     'size_units' => [ 'px', '%', 'em', 'rem', 'custom' ],
                     'selectors' => [
-                        '{{WRAPPER}} .splide__arrow' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+                        '{{WRAPPER}} .splide__pagination__page' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
                     ],
                 ]
             );
@@ -1340,20 +1341,20 @@ class EmuSliderElementor extends \Elementor\Widget_Base {
         
                                             <?php
                                             // Verificando se o link está definido
-                                            if (!empty($slide['link'])) {
+                                            if (!empty($slide['link']['url'])) {
 
-                                            // Gerar o HTML do link
-                                            echo '<a href="' . $slide['url'] . '" class="slide-link"';
+                                                // Gerar o HTML do link
+                                                echo '<a href="' . $slide['link']['url'] . '" class="slide-link"';
 
-                                            // Adicionar o atributo target se 'is_external' for verdadeiro
-                                            if ($slide['is_external']) {
-                                                echo ' target="_blank"';
-                                            }
+                                                // Adicionar o atributo target se 'is_external' for verdadeiro
+                                                if ($slide['link']['is_external']) {
+                                                    echo ' target="_blank"';
+                                                }
 
-                                            // Adicionar o atributo rel se 'nofollow' for verdadeiro
-                                            if ($slide['nofollow']) {
-                                                echo ' rel="nofollow"';
-                                            }
+                                                // Adicionar o atributo rel se 'nofollow' for verdadeiro
+                                                if ($slide['link']['nofollow']) {
+                                                    echo ' rel="nofollow"';
+                                                }
 
                                             echo '></a>';
                                             }
