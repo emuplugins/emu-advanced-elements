@@ -24,7 +24,7 @@
     background-color: white;
     opacity: 1;
     font-size: 1em;
-    padding:0;
+    padding: 0 !important;;
 }
 
 /* Cada arrow */
@@ -43,7 +43,7 @@
     height: auto!important;
     aspect-ratio: 1!important;
     opacity: 1!important;
-    padding:0;
+    padding: 0 !important;;
 }
 .splide__slide{
     width: calc(100%);
