@@ -38,7 +38,6 @@ class EmuSliderElementor extends \Elementor\Widget_Base {
     
         protected function register_controls(): void {
     
-    
             $this->start_controls_section(
                 'content_section',
                 [
@@ -47,6 +46,74 @@ class EmuSliderElementor extends \Elementor\Widget_Base {
                 ]
             );
     
+
+            
+            $this->start_controls_tabs(
+                'breakpointSizes'
+            );
+
+            $this->start_controls_tab(
+                'breakpointSizes_desktop_tab',
+                [
+                    'label' => esc_html__( 'Desktop', 'textdomain' ),
+                ]
+            );
+            
+            $this->add_control(
+                'breakpointSizes_desktop',
+                [
+                    'label' => esc_html__( 'Desktop breakpoint', 'textdomain' ),
+                    'type' => \Elementor\Controls_Manager::NUMBER,
+                    'min' => 1,
+                    'max' => 10,
+                    'step' => 1,
+                    'default' => 1,
+                ]
+            );
+
+            $this->end_controls_tab();
+
+            $this->start_controls_tab(
+                'breakpointSizes_tablet_tab',
+                [
+                    'label' => esc_html__( 'Tablet', 'textdomain' ),
+                ]
+            );
+
+            $this->add_control(
+                'breakpointSizes_tablet',
+                [
+                    'label' => esc_html__( 'Tablet breakpoint', 'textdomain' ),
+                    'type' => \Elementor\Controls_Manager::NUMBER,
+                    'min' => 1,
+                    'max' => 10,
+                    'step' => 1,
+                ]
+            );
+            $this->end_controls_tab();
+
+            $this->start_controls_tab(
+                'breakpointSizes_mobile_tab',
+                [
+                    'label' => esc_html__( 'Mobile', 'textdomain' ),
+                ]
+            );
+            
+            $this->add_control(
+                'breakpointSizes_mobile',
+                [
+                    'label' => esc_html__( 'Mobile breakpoint', 'textdomain' ),
+                    'type' => \Elementor\Controls_Manager::NUMBER,
+                    'min' => 1,
+                    'max' => 10,
+                    'step' => 1,
+                ]
+            );
+            
+            $this->end_controls_tab();
+
+            $this->end_controls_tabs();
+
             $repeater = new \Elementor\Repeater();
 
             $repeater->add_control(
@@ -227,13 +294,175 @@ class EmuSliderElementor extends \Elementor\Widget_Base {
 
 
             $this->start_controls_section(
-                'content_section',
+                'slider_options',
                 [
                     'label' => esc_html__( 'Slider options', 'textdomain' ),
                     'tab' => \Elementor\Controls_Manager::TAB_CONTENT,
                 ]
             );
+
+            $this->add_control(
+            'slider_type',
+            [
+                'label' => esc_html__( 'Type', 'textdomain' ),
+                'type' => \Elementor\Controls_Manager::SELECT,
+                'default' => 'loop',
+				'options' => [
+					'loop' => esc_html__( 'Loop', 'textdomain' ),
+					'slide'  => esc_html__( 'Slide', 'textdomain' ),
+					'fade' => esc_html__( 'Fade', 'textdomain' ),
+				]
+            ]
+            );
+            $this->add_control(
+            'rewind',
+            [
+                'label' => esc_html__( 'Rewind', 'textdomain' ),
+                'type' => \Elementor\Controls_Manager::SELECT,
+                'default' => 'false',
+				'options' => [
+					'true' => esc_html__( 'Yes', 'textdomain' ),
+					'false'  => esc_html__( 'No', 'textdomain' ),
+				]
+            ]
+            );
+            $this->add_control(
+            'drag',
+            [
+                'label' => esc_html__( 'Draggable', 'textdomain' ),
+                'type' => \Elementor\Controls_Manager::SELECT,
+                'default' => 'false',
+				'options' => [
+					'true' => esc_html__( 'Yes', 'textdomain' ),
+					'false'  => esc_html__( 'No', 'textdomain' ),
+				]
+            ]
+            );
+            $this->add_control(
+            'gap',
+            [
+                'label' => esc_html__( 'Space between', 'textdomain' ),
+                'type' => \Elementor\Controls_Manager::NUMBER,
+                    'min' => 0,
+                    'max' => 100,
+                    'step' => 1,
+                    'default' => 0,
+            ]
+            );
+            $this->add_control(
+            'arrows',
+            [
+                'label' => esc_html__( 'Display Arrows', 'textdomain' ),
+                'type' => \Elementor\Controls_Manager::SELECT,
+                'default' => 'true',
+				'options' => [
+					'true' => esc_html__( 'Yes', 'textdomain' ),
+					'false'  => esc_html__( 'No', 'textdomain' ),
+				]
+            ]
+            );
+            $this->add_control(
+            'pagination',
+            [
+                'label' => esc_html__( 'Display dots', 'textdomain' ),
+                'type' => \Elementor\Controls_Manager::SELECT,
+                'default' => 'true',
+				'options' => [
+					'true' => esc_html__( 'Yes', 'textdomain' ),
+					'false'  => esc_html__( 'No', 'textdomain' ),
+				]
+            ]
+            );
+            $this->add_control(
+            'autoplay',
+            [
+                'label' => esc_html__( 'Autoplay', 'textdomain' ),
+                'type' => \Elementor\Controls_Manager::SELECT,
+                'default' => 'true',
+				'options' => [
+					'true' => esc_html__( 'Yes', 'textdomain' ),
+					'false'  => esc_html__( 'No', 'textdomain' ),
+				]
+            ]
+            );
+
+            $this->add_control(
+                'interval',
+                [
+                    'label' => esc_html__( 'Interval', 'textdomain' ),
+                    'type' => \Elementor\Controls_Manager::NUMBER,
+                    'min' => 100,
+                    'max' => 10000,
+                    'step' => 500,
+                    'default' => 3000,
+                ]
+            );
+
+            $this->start_controls_tabs(
+                'per_page'
+            );
+
+            $this->start_controls_tab(
+                'per_page_desktop_tab',
+                [
+                    'label' => esc_html__( 'Desktop', 'textdomain' ),
+                ]
+            );
             
+            $this->add_control(
+                'per_page_desktop',
+                [
+                    'label' => esc_html__( 'Items to show', 'textdomain' ),
+                    'type' => \Elementor\Controls_Manager::NUMBER,
+                    'min' => 1,
+                    'max' => 10,
+                    'step' => 1,
+                    'default' => 1,
+                ]
+            );
+
+            $this->end_controls_tab();
+
+            $this->start_controls_tab(
+                'per_page_tablet_tab',
+                [
+                    'label' => esc_html__( 'Tablet', 'textdomain' ),
+                ]
+            );
+
+            $this->add_control(
+                'per_page_tablet',
+                [
+                    'label' => esc_html__( 'Items to show', 'textdomain' ),
+                    'type' => \Elementor\Controls_Manager::NUMBER,
+                    'min' => 1,
+                    'max' => 10,
+                    'step' => 1,
+                ]
+            );
+            $this->end_controls_tab();
+
+            $this->start_controls_tab(
+                'per_page_mobile_tab',
+                [
+                    'label' => esc_html__( 'Mobile', 'textdomain' ),
+                ]
+            );
+            
+            $this->add_control(
+                'per_page_mobile',
+                [
+                    'label' => esc_html__( 'Items to show', 'textdomain' ),
+                    'type' => \Elementor\Controls_Manager::NUMBER,
+                    'min' => 1,
+                    'max' => 10,
+                    'step' => 1,
+                ]
+            );
+            
+            $this->end_controls_tab();
+
+            $this->end_controls_tabs();
 
             $this->end_controls_section();
 
@@ -794,21 +1023,49 @@ class EmuSliderElementor extends \Elementor\Widget_Base {
         protected function render(): void {
             $settings = $this->get_settings_for_display();
             $slides = $settings['list'];
-        
-            if ($slides) : ?>
-        
-                <!-- vamos montar o slider -->
-                <div class="emu-splide-wrapper">
-                    <div class="splide" data-splide='{
-                        "type": "loop",
-                        "perPage": 1,
-                        "autoplay": false,
-                        "interval": 3000,
-                        "pagination": true,
-                        "arrows": true,
-                        "autoHeight": true,
-                        "drag": false
-                    }'>
+
+                if ($settings) : ?> 
+                    <!-- Vamos montar o slider -->
+                    <div class="emu-splide-wrapper">
+                        <div class="splide" data-splide='<?php
+                            // Definindo o array de configurações
+                            $splide_config = array();
+
+                            // Verificando e adicionando as configurações definidas
+                            if (isset($settings['slider_type'])) $splide_config['type'] = $settings['slider_type'];
+                            if (isset($settings['rewind'])) $splide_config['rewind'] = $settings['rewind'];
+                            if (isset($settings['gap'])) $splide_config['gap'] = $settings['gap'];
+                            if (isset($settings['autoplay'])) $splide_config['autoplay'] = $settings['autoplay'];
+                            if (isset($settings['interval'])) $splide_config['interval'] = $settings['interval'];
+                            if (isset($settings['pagination'])) $splide_config['pagination'] = $settings['pagination'];
+                            if (isset($settings['arrows'])) $splide_config['arrows'] = $settings['arrows'];
+                            if (isset($settings['drag'])) $splide_config['drag'] = $settings['drag'];
+
+                            // Definindo os breakpoints
+                            $splide_config['breakpoints'] = array();
+
+                            // Verificando e configurando os breakpoints
+                            if (isset($settings['breakpointSizes_mobile']) && $settings['breakpointSizes_mobile'] > 0 && $settings['breakpointSizes_mobile'] !== null) {
+                                $splide_config['breakpoints'][$settings['breakpointSizes_mobile']] = array(
+                                    'perPage' => isset($settings['per_page_mobile_items']) ? $settings['per_page_mobile_items'] : null
+                                );
+                            }
+                            if (isset($settings['breakpointSizes_tablet']) && $settings['breakpointSizes_tablet'] > 0 && $settings['breakpointSizes_tablet'] !== null) {
+                                $splide_config['breakpoints'][$settings['breakpointSizes_tablet']] = array(
+                                    'perPage' => isset($settings['per_page_tablet_items']) ? $settings['per_page_tablet_items'] : null
+                                );
+                            }
+
+                            // Garantindo que o desktop tenha um valor padrão de 1, caso não seja definido
+                            $desktop_breakpoint = isset($settings['breakpointSizes_desktop']) ? $settings['breakpointSizes_desktop'] : 1;
+                            $splide_config['breakpoints'][$desktop_breakpoint] = array(
+                                'perPage' => isset($settings['per_page_desktop_items']) ? $settings['per_page_desktop_items'] : 1
+                            );
+
+                            // Gerando o JSON
+                            echo json_encode($splide_config, JSON_FORCE_OBJECT);
+                        ?>'>
+            
                         <div class="splide__track">
                             <ul class="splide__list">
                                 <?php foreach ($slides as $slide) : ?>
