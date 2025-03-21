@@ -20,18 +20,22 @@ if ( ! defined( 'ABSPATH' ) ) {
     exit;
 }
 
-define('PLUGIN_DIR', plugin_dir_path(__FILE__));
-define('PLUGIN_URL', plugin_dir_url(__FILE__));
+define('EAE_PLUGIN_DIR', plugin_dir_path(__FILE__));
+define('EAE_PLUGIN_URL', plugin_dir_url(__FILE__));
+
 // Load backend files
 if (is_admin()) {
-    require_once PLUGIN_DIR . 'update-handler.php';
-}
+    require_once EAE_PLUGIN_DIR . 'update-handler.php';
+}        
 
-if ( ! is_admin() || ( is_admin() && isset($_GET['action']) && $_GET['action'] === 'edit' ) ) {
-    // Functions and shortcodes
-    require_once PLUGIN_DIR . 'includes/shortcodes/advanced-marquee-shortcode.php';
-    // Functions and shortcodes
-    require_once PLUGIN_DIR . 'includes/shortcodes/emu-gallery-lightbox.php';
-    // Builders
-    require_once PLUGIN_DIR . 'builders/Bricks/elements-loader.php';
-}
+
+// Functions and shortcodes
+require_once EAE_PLUGIN_DIR . 'includes/shortcodes/advanced-marquee-shortcode.php';
+
+// Functions and shortcodes
+require_once EAE_PLUGIN_DIR . 'includes/shortcodes/emu-gallery-lightbox.php';
+
+// Builders
+require_once EAE_PLUGIN_DIR . 'builders/Bricks/elements-loader.php';
+
+require_once EAE_PLUGIN_DIR . 'builders/Elementor/elements-loader.php';

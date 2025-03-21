@@ -2,7 +2,7 @@
 
 if ( ! defined('ABSPATH')) exit;
 
-require_once PLUGIN_DIR . 'includes/functions/gallery-lightbox.php';
+require_once EAE_PLUGIN_DIR . 'includes/functions/gallery-lightbox.php';
 
 function emu_gallery_lightbox_shortcode($data){
 

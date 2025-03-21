@@ -2,8 +2,8 @@
 
 if ( ! defined('ABSPATH')) exit;
 
-// // Verifica se o Bricks Builder está ativo
-// if ( class_exists( 'Bricks\Elements' ) ) {
+// Verifica se o Bricks Builder está ativo
+if ( class_exists( 'Bricks\Elements' ) ) {
 
     // Registra o elemento personalizado
     add_action( 'init', function() {
@@ -25,3 +25,4 @@ if ( ! defined('ABSPATH')) exit;
             \Bricks\Elements::register_element( (plugin_dir_path( __FILE__ ).$element['file'] ), $element['slug'], $element['class'] );
         }
     }, 11 );
+}
