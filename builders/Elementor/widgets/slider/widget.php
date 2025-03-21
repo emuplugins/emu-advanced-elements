@@ -53,21 +53,19 @@ class EmuSliderElementor extends \Elementor\Widget_Base {
             );
 
             $this->start_controls_tab(
-                'breakpointSizes_desktop_tab',
+                'breakpointSizes_laptop_tab',
                 [
-                    'label' => esc_html__( 'Desktop', 'textdomain' ),
+                    'label' => esc_html__( 'laptop', 'textdomain' ),
                 ]
             );
             
             $this->add_control(
-                'breakpointSizes_desktop',
+                'breakpointSizes_laptop',
                 [
-                    'label' => esc_html__( 'Desktop breakpoint', 'textdomain' ),
+                    'label' => esc_html__( 'laptop breakpoint', 'textdomain' ),
                     'type' => \Elementor\Controls_Manager::NUMBER,
-                    'min' => 1,
-                    'max' => 10,
                     'step' => 1,
-                    'default' => 1,
+                    'placeholder' => 1450,
                 ]
             );
 
@@ -85,9 +83,8 @@ class EmuSliderElementor extends \Elementor\Widget_Base {
                 [
                     'label' => esc_html__( 'Tablet breakpoint', 'textdomain' ),
                     'type' => \Elementor\Controls_Manager::NUMBER,
-                    'min' => 1,
-                    'max' => 10,
                     'step' => 1,
+                    'placeholder' => 1100,
                 ]
             );
             $this->end_controls_tab();
@@ -104,9 +101,8 @@ class EmuSliderElementor extends \Elementor\Widget_Base {
                 [
                     'label' => esc_html__( 'Mobile breakpoint', 'textdomain' ),
                     'type' => \Elementor\Controls_Manager::NUMBER,
-                    'min' => 1,
-                    'max' => 10,
                     'step' => 1,
+                    'placeholder' => 767,
                 ]
             );
             
@@ -115,6 +111,17 @@ class EmuSliderElementor extends \Elementor\Widget_Base {
             $this->end_controls_tabs();
 
             $repeater = new \Elementor\Repeater();
+
+            $repeater->add_control(
+                'logo',
+            [
+                'label' => esc_html__( 'logo', 'textdomain' ),
+                'type' => \Elementor\Controls_Manager::MEDIA,
+                'dynamic' => [
+                'active' => true,
+                ],
+            ]
+            );
 
             $repeater->add_control(
                 'bg_color',
@@ -381,7 +388,7 @@ class EmuSliderElementor extends \Elementor\Widget_Base {
                 'default' => 'true',
 				'options' => [
 					'true' => esc_html__( 'Yes', 'textdomain' ),
-					'false'  => esc_html__( 'No', 'textdomain' ),
+					'pause'  => esc_html__( 'No', 'textdomain' ),
 				]
             ]
             );
@@ -397,20 +404,31 @@ class EmuSliderElementor extends \Elementor\Widget_Base {
                     'default' => 3000,
                 ]
             );
+            $this->add_control(
+                'speed',
+                [
+                    'label' => esc_html__( 'Transition speed', 'textdomain' ),
+                    'type' => \Elementor\Controls_Manager::NUMBER,
+                    'min' => 0,
+                    'max' => 5000,
+                    'step' => 100,
+                    'default' => 400,
+                ]
+            );
 
             $this->start_controls_tabs(
-                'per_page'
+                'per_page_tab'
             );
 
             $this->start_controls_tab(
-                'per_page_desktop_tab',
+                'per_page_default',
                 [
                     'label' => esc_html__( 'Desktop', 'textdomain' ),
                 ]
             );
             
             $this->add_control(
-                'per_page_desktop',
+                'per_page',
                 [
                     'label' => esc_html__( 'Items to show', 'textdomain' ),
                     'type' => \Elementor\Controls_Manager::NUMBER,
@@ -424,6 +442,27 @@ class EmuSliderElementor extends \Elementor\Widget_Base {
             $this->end_controls_tab();
 
             $this->start_controls_tab(
+                'per_page_laptop_tab',
+                [
+                    'label' => esc_html__( 'Laptop', 'textdomain' ),
+                ]
+            );
+            
+            $this->add_control(
+
+                'per_page_laptop_items',
+                [
+                    'label' => esc_html__( 'Items to show', 'textdomain' ),
+                    'type' => \Elementor\Controls_Manager::NUMBER,
+                    'min' => 1,
+                    'max' => 10,
+                    'step' => 1,
+                ]
+            );
+
+            $this->end_controls_tab();
+
+            $this->start_controls_tab(
                 'per_page_tablet_tab',
                 [
                     'label' => esc_html__( 'Tablet', 'textdomain' ),
@@ -431,7 +470,7 @@ class EmuSliderElementor extends \Elementor\Widget_Base {
             );
 
             $this->add_control(
-                'per_page_tablet',
+                'per_page_tablet_items',
                 [
                     'label' => esc_html__( 'Items to show', 'textdomain' ),
                     'type' => \Elementor\Controls_Manager::NUMBER,
@@ -450,7 +489,7 @@ class EmuSliderElementor extends \Elementor\Widget_Base {
             );
             
             $this->add_control(
-                'per_page_mobile',
+                'per_page_mobile_items',
                 [
                     'label' => esc_html__( 'Items to show', 'textdomain' ),
                     'type' => \Elementor\Controls_Manager::NUMBER,
@@ -467,9 +506,135 @@ class EmuSliderElementor extends \Elementor\Widget_Base {
             $this->end_controls_section();
 
 
-
+            
 
             // estilos
+
+
+            // SLIDER
+
+            $this->start_controls_section(
+                'slider_styles',
+                [
+                    'label' => esc_html__( 'Slider', 'textdomain' ),
+                    'tab' => \Elementor\Controls_Manager::TAB_STYLE,
+                ]
+            );
+
+            $this->add_control(
+                'items_align',
+                [
+                    'label' => esc_html__( 'Items alignment', 'textdomain' ),
+                    'type' => \Elementor\Controls_Manager::CHOOSE,
+                    'options' => [
+                        'start' => [
+                            'title' => esc_html__( 'Left', 'textdomain' ),
+                            'icon' => 'eicon-text-align-left',
+                        ],
+                        'center' => [
+                            'title' => esc_html__( 'Center', 'textdomain' ),
+                            'icon' => 'eicon-text-align-center',
+                        ],
+                        'end' => [
+                            'title' => esc_html__( 'Right', 'textdomain' ),
+                            'icon' => 'eicon-text-align-right',
+                        ],
+                    ],
+                    'toggle' => true,
+                    'selectors' => [
+                        '{{WRAPPER}} .emu-splide-content-title, {{WRAPPER}} .emu-splide-html-wrapper' => 'text-align: {{VALUE}}',
+                        '{{WRAPPER}} .emu-slide-logo, {{WRAPPER}} .emu-splide-button' => 'align-self: {{VALUE}};',
+                    ],
+                ]
+            );
+
+
+            $this->add_responsive_control(
+                'slider_padding',
+                [
+                    'type' => \Elementor\Controls_Manager::DIMENSIONS,
+                    'label' => esc_html__( 'Content padding', 'textdomain' ),
+                    'size_units' => [ 'px', '%', 'em', 'rem', 'custom' ],
+                    'selectors' => [
+                        '{{WRAPPER}} .emu-splide-content' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+                    ],
+                ]
+            );
+
+            $this->add_group_control(
+            \Elementor\Group_Control_Border::get_type(),
+            [
+                'name' => 'slide_item_border',
+                'selector' => '{{WRAPPER}} .emu-slide-content-wrapper',
+                ]
+            );
+        
+    
+            $this->add_responsive_control(
+                'slide_item_border_radius',
+                [
+                    'type' => \Elementor\Controls_Manager::DIMENSIONS,
+                    'label' => esc_html__( 'Slider Item Radius', 'textdomain' ),
+                    'size_units' => [ 'px', '%', 'em', 'rem', 'custom' ],
+                    'selectors' => [
+                        '{{WRAPPER}} .emu-slide-content-wrapper' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+                        '{{WRAPPER}} .emu-slide-background-img-wrapper{' => 'border-radius: calc({{TOP}}{{UNIT}} + 2%) calc({{RIGHT}}{{UNIT}} + 2%) calc({{BOTTOM}}{{UNIT}} + 2%) calc({{LEFT}}{{UNIT}} + 2%);',
+                    ],
+                ]
+            );
+
+            $this->add_responsive_control(
+                'slider_width',
+                [
+                    'type' => \Elementor\Controls_Manager::SLIDER,
+                    'label' => esc_html__( 'Width', 'textdomain' ),
+                    'range' => [
+                        'px' => [
+                            'min' => 300,
+                            'max' => 1920,
+                        ],
+                    ],
+                    'selectors' => [
+                        '{{WRAPPER}} .emu-splide-wrapper' => '--content-width: {{SIZE}}{{UNIT}};',
+                    ],
+                ]
+            );
+            $this->add_responsive_control(
+                'slider_height',
+                [
+                    'type' => \Elementor\Controls_Manager::SLIDER,
+                    'label' => esc_html__( 'heigth', 'textdomain' ),
+                    'range' => [
+                        'px' => [
+                            'min' => 300,
+                            'max' => 1920,
+                        ],
+                    ],
+                    'selectors' => [
+                        '{{WRAPPER}} .emu-splide-wrapper' => '--content-height: {{SIZE}}{{UNIT}};',
+                    ],
+                ]
+            );
+            $this->add_responsive_control(
+                'slider_gap',
+                [
+                    'type' => \Elementor\Controls_Manager::SLIDER,
+                    'label' => esc_html__( 'Space between elements', 'textdomain' ),
+                    'range' => [
+                        'px' => [
+                            'min' => 0,
+                            'max' => 100,
+                        ],
+                    ],
+                    'selectors' => [
+                        '{{WRAPPER}} .emu-splide-content' => 'gap: {{SIZE}}{{UNIT}};',
+                    ],
+                ]
+            );
+
+            $this->end_controls_section();
+
+            // SLIDER
 
             $this->start_controls_section(
                 'style_section',
@@ -624,6 +789,119 @@ class EmuSliderElementor extends \Elementor\Widget_Base {
 
             // CONTEUDO>
 
+            // logo
+            $this->start_controls_tab(
+                'logo_styles',
+                [
+                    'label' => esc_html__( 'Logo', 'textdomain' ),
+                ]
+            );
+
+            $this->add_responsive_control(
+                'logo_width',
+                [
+                    'type' => \Elementor\Controls_Manager::SLIDER,
+                    'label' => esc_html__( 'Width', 'textdomain' ),
+                    'size_units' => [ 'px', '%', 'vh', 'vw', 'custom' ],
+                    'range' => [
+                        'px'=> [
+                            'min' => 100,
+                            'max' =>450,
+                        ],
+                    ],
+                    'selectors' => [
+                        '{{WRAPPER}} .emu-splide-wrapper .emu-slide-logo' => 'width:{{SIZE}}{{UNIT}};',
+                    ],
+                ]
+            );
+            $this->add_responsive_control(
+                'logo_height',
+                [
+                    'type' => \Elementor\Controls_Manager::SLIDER,
+                    'label' => esc_html__( 'Height', 'textdomain' ),
+                    'size_units' => [ 'px', '%', 'vh', 'vw', 'custom' ],
+                    'range' => [
+                        'px'=> [
+                            'min' => 100,
+                            'max' =>450,
+                        ],
+                    ],
+                    'selectors' => [
+                        '{{WRAPPER}} .emu-splide-wrapper .emu-slide-logo' => 'height:{{SIZE}}{{UNIT}};',
+                    ],
+                ]
+            );
+
+            $this->add_control(
+                'logo_fit',
+                [
+                    'label' => esc_html__( 'Object Fit', 'textdomain' ),
+                    'type' => \Elementor\Controls_Manager::SELECT,
+                    'default' => 'contain',
+                    'options' => [
+                        'contain' => esc_html__( 'Contain', 'textdomain' ),
+                        'cover'  => esc_html__( 'Cover', 'textdomain' ),
+                        'stretch' => esc_html__( 'Stretch', 'textdomain' ),
+                    ],
+                    'selectors' => [
+                        '{{WRAPPER}} .emu-splide-wrapper .emu-slide-logo' => 'object-fit:{{VALUE}};',
+                    ],
+                ]
+                );
+
+            $this->add_responsive_control(
+                'logo_align',
+                [
+                    'label' => esc_html__( 'Alignment', 'textdomain' ),
+                    'type' => \Elementor\Controls_Manager::CHOOSE,
+                    'options' => [
+                        'start' => [
+                            'title' => esc_html__( 'Left', 'textdomain' ),
+                            'icon' => 'eicon-text-align-left',
+                        ],
+                        'center' => [
+                            'title' => esc_html__( 'Center', 'textdomain' ),
+                            'icon' => 'eicon-text-align-center',
+                        ],
+                        'end' => [
+                            'title' => esc_html__( 'Right', 'textdomain' ),
+                            'icon' => 'eicon-text-align-right',
+                        ],
+                    ],
+                    'toggle' => true,
+                    'selectors' => [
+                        '{{WRAPPER}} .emu-slide-logo' => 'align-self: {{VALUE}};',
+                    ],
+                ]
+            );
+
+            
+            $this->add_group_control(
+            \Elementor\Group_Control_Border::get_type(),
+            [
+                'name' => 'logo_border',
+                'selector' => '{{WRAPPER}} .emu-slide-logo',
+                ]
+            );
+    
+
+            $this->add_responsive_control(
+                'logo_border_radius',
+                [
+                    'type' => \Elementor\Controls_Manager::DIMENSIONS,
+                    'label' => esc_html__( 'Border Radius', 'textdomain' ),
+                    'size_units' => [ 'px', '%', 'em', 'rem', 'custom' ],
+                    'selectors' => [
+                        '{{WRAPPER}} .emu-slide-logo' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+                    ],
+                ]
+            );
+
+            $this->end_controls_tab();
+
+
+            // logo>
+
             // <BOTAO
 
             $this->start_controls_tab(
@@ -734,71 +1012,13 @@ class EmuSliderElementor extends \Elementor\Widget_Base {
 
             $this->end_controls_tab();
 
-            // BOTAO>
-
+            
             $this->end_controls_tabs();
-
+            
             $this->end_controls_section();
-
-            // SLIDER
-
-            $this->start_controls_section(
-                'slider_styles',
-                [
-                    'label' => esc_html__( 'Slider', 'textdomain' ),
-                    'tab' => \Elementor\Controls_Manager::TAB_STYLE,
-                ]
-            );
-
-
-            $this->add_responsive_control(
-                'slider_padding',
-                [
-                    'type' => \Elementor\Controls_Manager::DIMENSIONS,
-                    'label' => esc_html__( 'padding', 'textdomain' ),
-                    'size_units' => [ 'px', '%', 'em', 'rem', 'custom' ],
-                    'selectors' => [
-                        '{{WRAPPER}} .emu-splide-content' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
-                    ],
-                ]
-            );
-
-            $this->add_responsive_control(
-                'slider_width',
-                [
-                    'type' => \Elementor\Controls_Manager::SLIDER,
-                    'label' => esc_html__( 'Width', 'textdomain' ),
-                    'range' => [
-                        'px' => [
-                            'min' => 300,
-                            'max' => 1920,
-                        ],
-                    ],
-                    'selectors' => [
-                        '{{WRAPPER}} .emu-splide-wrapper' => '--content-width: {{SIZE}}{{UNIT}};',
-                    ],
-                ]
-            );
-            $this->add_responsive_control(
-                'slider_height',
-                [
-                    'type' => \Elementor\Controls_Manager::SLIDER,
-                    'label' => esc_html__( 'heigth', 'textdomain' ),
-                    'range' => [
-                        'px' => [
-                            'min' => 300,
-                            'max' => 1920,
-                        ],
-                    ],
-                    'selectors' => [
-                        '{{WRAPPER}} .emu-splide-wrapper' => '--content-height: {{SIZE}}{{UNIT}};',
-                    ],
-                ]
-            );
-
-            $this->end_controls_section();
-
-            // SLIDER
+            
+            // BOTAO>
+            
 
             // Arrows
 
@@ -1024,47 +1244,77 @@ class EmuSliderElementor extends \Elementor\Widget_Base {
             $settings = $this->get_settings_for_display();
             $slides = $settings['list'];
 
-                if ($settings) : ?> 
-                    <!-- Vamos montar o slider -->
-                    <div class="emu-splide-wrapper">
-                        <div class="splide" data-splide='<?php
-                            // Definindo o array de configurações
-                            $splide_config = array();
+            if ($settings) : ?> 
+                <!-- Vamos montar o slider -->
+                <div class="emu-splide-wrapper">
+                    <div class="splide" data-splide='<?php
+                        // Definindo o array de configurações
+                        $splide_config = array();
+            
+                        // Verificando e adicionando as configurações definidas
+                        if (!empty($settings['slider_type'])) $splide_config['type'] = $settings['slider_type'];
 
-                            // Verificando e adicionando as configurações definidas
-                            if (isset($settings['slider_type'])) $splide_config['type'] = $settings['slider_type'];
-                            if (isset($settings['rewind'])) $splide_config['rewind'] = $settings['rewind'];
-                            if (isset($settings['gap'])) $splide_config['gap'] = $settings['gap'];
-                            if (isset($settings['autoplay'])) $splide_config['autoplay'] = $settings['autoplay'];
-                            if (isset($settings['interval'])) $splide_config['interval'] = $settings['interval'];
-                            if (isset($settings['pagination'])) $splide_config['pagination'] = $settings['pagination'];
-                            if (isset($settings['arrows'])) $splide_config['arrows'] = $settings['arrows'];
-                            if (isset($settings['drag'])) $splide_config['drag'] = $settings['drag'];
+                        if (!empty($settings['per_page'])) {
+                            
+                        $splide_config['perPage'] = $settings['per_page'];
 
-                            // Definindo os breakpoints
-                            $splide_config['breakpoints'] = array();
+                        }else{ 
 
-                            // Verificando e configurando os breakpoints
-                            if (isset($settings['breakpointSizes_mobile']) && $settings['breakpointSizes_mobile'] > 0 && $settings['breakpointSizes_mobile'] !== null) {
-                                $splide_config['breakpoints'][$settings['breakpointSizes_mobile']] = array(
-                                    'perPage' => isset($settings['per_page_mobile_items']) ? $settings['per_page_mobile_items'] : null
-                                );
-                            }
-                            if (isset($settings['breakpointSizes_tablet']) && $settings['breakpointSizes_tablet'] > 0 && $settings['breakpointSizes_tablet'] !== null) {
-                                $splide_config['breakpoints'][$settings['breakpointSizes_tablet']] = array(
-                                    'perPage' => isset($settings['per_page_tablet_items']) ? $settings['per_page_tablet_items'] : null
-                                );
-                            }
+                            $splide_config['perPage'] = 1;
 
-                            // Garantindo que o desktop tenha um valor padrão de 1, caso não seja definido
-                            $desktop_breakpoint = isset($settings['breakpointSizes_desktop']) ? $settings['breakpointSizes_desktop'] : 1;
-                            $splide_config['breakpoints'][$desktop_breakpoint] = array(
-                                'perPage' => isset($settings['per_page_desktop_items']) ? $settings['per_page_desktop_items'] : 1
+                        }
+            
+                        // Convertendo para booleano se necessário
+                        if (!empty($settings['rewind'])) $splide_config['rewind'] = filter_var($settings['rewind'], FILTER_VALIDATE_BOOLEAN);
+                        if (!empty($settings['speed'])) $splide_config['speed'] = $settings['speed'];
+                        if (!empty($settings['gap'])) $splide_config['gap'] = $settings['gap'];
+                        if (!empty($settings['autoplay'])) $splide_config['autoplay'] = filter_var($settings['autoplay'], FILTER_VALIDATE_BOOLEAN);
+                        if (!empty($settings['interval'])) $splide_config['interval'] = $settings['interval'];
+                        if (!empty($settings['pagination'])) $splide_config['pagination'] = filter_var($settings['pagination'], FILTER_VALIDATE_BOOLEAN);
+                        if (!empty($settings['arrows'])) $splide_config['arrows'] = filter_var($settings['arrows'], FILTER_VALIDATE_BOOLEAN);
+                        if (!empty($settings['drag'])) $splide_config['drag'] = filter_var($settings['drag'], FILTER_VALIDATE_BOOLEAN);
+            
+                        // Definindo os breakpoints
+                        $splide_config['breakpoints'] = array();
+
+                        $desktop_breakpoint = !empty($settings['breakpointSizes_laptop']) ? intval($settings['breakpointSizes_laptop']) : 1450;
+
+
+                        // Define o breakpoint desktop
+                        $settings['breakpointSizes_laptop'] = !empty($settings['breakpointSizes_laptop']) ? intval($settings['breakpointSizes_laptop']) : 1450;
+                        
+                        // coloca no array corretamente
+                        $splide_config['breakpoints'][$desktop_breakpoint] = array(
+                            'perPage' => $settings['per_page_laptop_items']
+                        );
+
+
+                        // define o breakpoint tablet
+                        $settings['breakpointSizes_tablet'] = !empty($settings['breakpointSizes_tablet']) ? intval($settings['breakpointSizes_tablet']) : 1100;
+                        
+                        // se tem mais do que 0 itens pra mostrar, ativa
+                        if ($settings['per_page_tablet_items'] > 0) {
+
+                            $splide_config['breakpoints'][$settings['breakpointSizes_tablet']] = array(
+                                'perPage' => $settings['per_page_tablet_items']
                             );
+                        }
+                        
+                        // define o breakpoint mobile
+                        $settings['breakpointSizes_mobile'] = !empty($settings['breakpointSizes_mobile']) ? intval($settings['breakpointSizes_mobile']) : 768;
+                        
+                        // se tem mais do que 0 itens pra mostrar, ativa
+                        if ($settings['per_page_mobile_items'] > 0) {
 
-                            // Gerando o JSON
-                            echo json_encode($splide_config, JSON_FORCE_OBJECT);
-                        ?>'>
+                            $splide_config['breakpoints'][$settings['breakpointSizes_mobile']] = array(
+                                'perPage' => $settings['per_page_mobile_items']
+                            );
+                        }
+            
+                        // Gerando o JSON
+                        echo json_encode($splide_config, JSON_FORCE_OBJECT);
+                    ?>'>
+            
             
                         <div class="splide__track">
                             <ul class="splide__list">
@@ -1072,7 +1322,7 @@ class EmuSliderElementor extends \Elementor\Widget_Base {
                                     <li class="splide__slide">
                                         <div class="emu-slide-content-wrapper <?php echo 'elementor-repeater-item-' . esc_attr($slide['_id']); ?>">
         
-                                            <picture>
+                                        <div class="emu-slide-background-img-wrapper"><picture>
                                                 <?php if (!empty($slide['bg_mobile']['url'])): ?>
                                                     <source media="(max-width: 767px)" srcset="<?= $slide['bg_mobile']['url']; ?>">
                                                 <?php endif; ?>
@@ -1082,9 +1332,9 @@ class EmuSliderElementor extends \Elementor\Widget_Base {
                                                 <?php endif; ?>
         
                                                 <?php if (!empty($slide['bg_desktop']['url'])): ?>
-                                                    <img src="<?= $slide['bg_desktop']['url']; ?>" alt="Imagem do Slide">
+                                                    <img src="<?= $slide['bg_desktop']['url']; ?>"class="emu-slide-background-img" alt="Imagem do Slide">
                                                 <?php endif; ?>
-                                            </picture>
+                                            </picture></div>
         
                                             <?php
                                             // Verificando se o link está definido
@@ -1108,6 +1358,13 @@ class EmuSliderElementor extends \Elementor\Widget_Base {
                                             ?>
         
                                             <div class="emu-splide-content">
+
+                                            <?php if (!empty($slide['logo'])): ?>
+                                                <img src="<?= $slide['logo']['url'];?>" class="emu-slide-logo">
+                                                <?php endif; ?>
+
+                                                
+                                                
                                                 <?php
                                                 if (!empty($slide['title'])) {
                                                     echo '<h2 class="emu-splide-content-title">' . $slide['title'] . '</h2>';
@@ -1134,64 +1391,109 @@ class EmuSliderElementor extends \Elementor\Widget_Base {
     
         protected function content_template(): void {
             ?>
-            <# if ( settings.list && settings.list.length ) { #>
-                <div class="emu-splide-wrapper">
-                    <div class="splide" data-splide='{
-                        "type": "loop",
-                        "perPage": 1,
-                        "autoplay": false,
-                        "interval": 3000,
-                        "pagination": true,
-                        "arrows": true,
-                        "autoHeight": true,
-                        "drag": false
-                    }'>
-                        <div class="splide__track">
-                            <ul class="splide__list">
-                                <# _.each( settings.list, function( slide ) { #>
-                                    <li class="splide__slide">
-                                        <div class="emu-slide-content-wrapper elementor-repeater-item-{{ slide._id }}">
-        
-                                            <picture>
-                                                <# if ( slide.bg_mobile && slide.bg_mobile.url ) { #>
-                                                    <source media="(max-width: 767px)" srcset="{{{ slide.bg_mobile.url }}}">
-                                                <# } #>
-        
-                                                <# if ( slide.bg_tablet && slide.bg_tablet.url ) { #>
-                                                    <source media="(max-width: 1024px)" srcset="{{{ slide.bg_tablet.url }}}">
-                                                <# } #>
-        
-                                                <# if ( slide.bg_desktop && slide.bg_desktop.url ) { #>
-                                                    <img src="{{{ slide.bg_desktop.url }}}" alt="Imagem do Slide">
-                                                <# } #>
-                                            </picture>
-        
-                                            <# if (slide.link) { #>
-                                            <a href="{{{ slide.url }}}" class="slide-link"
-                                                <# if (slide.is_external) { #> target="_blank" <# } #>
-                                                <# if (slide.nofollow) { #> rel="nofollow" <# } #>
-                                            ></a>
-                                        <# } #>
+            
+ <# if ( settings ) { #>
+    <!-- Vamos montar o slider -->
+    <div class="emu-splide-wrapper">
+        <div class="splide" data-splide='
+            <# 
+            var splideConfig = {};
 
-        
-                                            <div class="emu-splide-content">
-                                                <# if ( slide.title ) { #>
-                                                    <h2 class="emu-splide-content-title">{{{ slide.title }}}</h2>
-                                                <# } #>
-        
-                                                <# if ( slide.content ) { #>
-                                                    <div class="emu-splide-html-wrapper">{{{ slide.content }}}</div>
-                                                <# } #>
-        
-                                                <# if ( slide.button_text && slide.button_link ) { #>
-                                                    <a href="{{{ slide.button_link }}}" class="emu-splide-button">{{{ slide.button_text }}}</a>
-                                                <# } #>
-                                            </div>
-                                        </div>
-                                    </li>
-                                <# }); #>
-                            </ul>
-                        </div>
+            // Verificando e adicionando as configurações definidas
+            if ( settings.slider_type ) splideConfig.type = settings.slider_type;
+            splideConfig.perPage = settings.per_page ? settings.per_page : 1;
+
+            // Convertendo para booleano se necessário
+            if ( settings.rewind ) splideConfig.rewind = Boolean( settings.rewind );
+            if ( settings.speed ) splideConfig.speed = settings.speed;
+            if ( settings.gap ) splideConfig.gap = settings.gap;
+            if ( settings.autoplay ) splideConfig.autoplay = Boolean( settings.autoplay );
+            if ( settings.interval ) splideConfig.interval = settings.interval;
+            if ( settings.pagination ) splideConfig.pagination = Boolean( settings.pagination );
+            if ( settings.arrows ) splideConfig.arrows = Boolean( settings.arrows );
+            if ( settings.drag ) splideConfig.drag = Boolean( settings.drag );
+
+            // Definindo os breakpoints
+            splideConfig.breakpoints = {};
+
+            var desktopBreakpoint = settings.breakpointSizes_laptop ? settings.breakpointSizes_laptop : 1450;
+
+            var tabletBreakpoint = settings.breakpointSizes_tablet ? settings.breakpointSizes_tablet : 1100;
+            
+            var mobileBreakpoint = settings.breakpointSizes_mobile ? settings.breakpointSizes_mobile : 768;
+
+            // Breakpoints
+            if ( settings.per_page_laptop_items && settings.per_page_laptop_items > 0 ) {
+                splideConfig.breakpoints[ desktopBreakpoint ] = {
+                    perPage: settings.per_page_laptop_items
+                };
+            }
+            if ( settings.per_page_tablet_items && settings.per_page_tablet_items > 0 ) {
+                splideConfig.breakpoints[ tabletBreakpoint ] = {
+                    perPage: settings.per_page_tablet_items
+                };
+            }
+            if ( settings.per_page_mobile_items && settings.per_page_mobile_items > 0 ) {
+                splideConfig.breakpoints[ mobileBreakpoint ] = {
+                    perPage: settings.per_page_mobile_items
+                };
+            }
+
+            // Convertendo para JSON
+            print( JSON.stringify( splideConfig ) );
+            #>
+        '>
+                       
+        <div class="splide__track">
+    <ul class="splide__list">
+        <# _.each( settings.list, function( slide ) { #>
+            <li class="splide__slide">
+                <div class="emu-slide-content-wrapper elementor-repeater-item-{{ slide._id }}">
+                <div class="emu-slide-background-img-wrapper">
+                    <picture>
+                        <# if ( slide.bg_mobile.url ) { #>
+                            <source media="(max-width: 767px)" srcset="{{ slide.bg_mobile.url }}">
+                        <# } #>
+
+                        <# if ( slide.bg_tablet.url ) { #>
+                            <source media="(max-width: 1024px)" srcset="{{ slide.bg_tablet.url }}">
+                        <# } #>
+
+                        <# if ( slide.bg_desktop.url ) { #>
+                            <img src="{{ slide.bg_desktop.url }}" class="emu-slide-background-img" alt="Imagem do Slide">
+                        <# } #>
+                    </picture>
+                </div>
+                    <# if ( slide.link ) { #>
+                        <a href="{{ slide.url }}" class="slide-link"
+                           <# if ( slide.is_external ) { #> target="_blank" <# } #>
+                           <# if ( slide.nofollow ) { #> rel="nofollow" <# } #>
+                        ></a>
+                    <# } #>
+
+                    <div class="emu-splide-content">
+
+                        <# if ( slide.logo ) { #>
+                        <img src="{{ slide.logo.url }}" class="emu-slide-logo">
+                        <# } #>
+
+                        <# if ( slide.title ) { #>
+                            <h2 class="emu-splide-content-title">{{ slide.title }}</h2>
+                        <# } #>
+
+                        <# if ( slide.content ) { #>
+                            <div class="emu-splide-html-wrapper">{{{ slide.content }}}</div>
+                        <# } #>
+
+                        <# if ( slide.button_text ) { #>
+                            <a href="{{ slide.button_link }}" class="emu-splide-button">{{ slide.button_text }}</a>
+                        <# } #>
+                    </div>
+                </div>
+            </li>
+        <# } ); #>
+    </ul>
+</div>
                     </div>
                 </div>
             <# } #>
