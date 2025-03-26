@@ -145,8 +145,13 @@
     width:fit-content;
 }
 
-.splide__list{backface-visibility: visible;visibility: visible!important;}
+.emu-splide-wrapper .splide__list{backface-visibility: visible;visibility: visible!important;}
 
-.splide{backface-visibility: visible;visibility: visible!important;}
+.emu-splide-wrapper .splide{backface-visibility: visible;visibility: visible!important;}
 
-.splide__slide{backface-visibility: visible;visibility: visible!important; max-width:100%;}
+.emu-splide-wrapper .splide__slide{backface-visibility: visible;visibility: visible!important; max-width:100%;}
+
+
+.emu-splide-wrapper .splide__pagination__page {
+    transform: none;
+}
