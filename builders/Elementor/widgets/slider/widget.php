@@ -1467,9 +1467,12 @@ class EmuSliderElementor extends \Elementor\Widget_Base {
                                                     echo '<div class="emu-splide-html-wrapper">' . $slide['content'] . '</div>';
                                                 }
                                                 if (!empty($slide['button_text'])) {
-                                                    $button_link = $slide['button_link']['url'] ?? '#'; // Usando coalescência de nulidade aqui
+                                                    // Verifica se a URL está vazia e, se estiver, usa '#'
+                                                    $button_link = !empty($slide['button_link']['url']) ? $slide['button_link']['url'] : '#';
+                                                    
                                                     echo '<a href="' . esc_url( $button_link ) . '" class="emu-splide-button">' . esc_html( $slide['button_text'] ) . '</a>';
                                                 }
+                                                
                                                 ?>
                                             </div>
                                             </div>
@@ -1587,8 +1590,9 @@ class EmuSliderElementor extends \Elementor\Widget_Base {
                         <# } #>
 
                         <# if ( slide.button_text ) { #>
-                            <a href="{{ slide.button_link.url }}" class="emu-splide-button">{{ slide.button_text }}</a>
-                        <# } #>
+    <a href="{{ slide.button_link.url ? slide.button_link.url : '#' }}" class="emu-splide-button">{{ slide.button_text }}</a>
+<# } #>
+
                     </div>
                     </div>
                 </div>
