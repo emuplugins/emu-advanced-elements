@@ -131,7 +131,7 @@ class EmuSliderElementor extends \Elementor\Widget_Base {
                 'label' => esc_html__( 'Overlay Background', 'textdomain' ),
                 'type' => \Elementor\Controls_Manager::COLOR,
                 'selectors' => [
-                    '{{WRAPPER}} {{CURRENT_ITEM}} .splide__slide:after' => 'content: ""; background-color: {{VALUE}}; width:100%; height:100%; position: absolute; top: 0; left: 0;'
+                    '{{WRAPPER}} {{CURRENT_ITEM}}:after' => 'content: ""; background-color: {{VALUE}}; width:100%; height:100%; position: absolute; top: 0; left: 0;'
                 ],
             ]
             );
