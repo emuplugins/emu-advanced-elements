@@ -538,7 +538,7 @@ class EmuSliderElementor extends \Elementor\Widget_Base {
                 ]
             );
 
-            $this->add_control(
+            $this->add_responsive_control(
                 'items_align',
                 [
                     'label' => esc_html__( 'Items alignment', 'textdomain' ),
@@ -636,7 +636,7 @@ class EmuSliderElementor extends \Elementor\Widget_Base {
                 ]
             );
 
-            $this->add_control(
+            $this->add_responsive_control(
                 'items_container_align',
                 [
                     'label' => esc_html__( 'Container alignment', 'textdomain' ),
@@ -719,7 +719,7 @@ class EmuSliderElementor extends \Elementor\Widget_Base {
                 ]
             );
 
-            $this->add_control(
+            $this->add_responsive_control(
                 'title_align',
                 [
                     'label' => esc_html__( 'Alignment', 'textdomain' ),
@@ -789,7 +789,7 @@ class EmuSliderElementor extends \Elementor\Widget_Base {
                 ]
             );
 
-            $this->add_control(
+            $this->add_responsive_control(
                 'content_align',
                 [
                     'label' => esc_html__( 'Alignment', 'textdomain' ),
@@ -1245,7 +1245,24 @@ class EmuSliderElementor extends \Elementor\Widget_Base {
                         ],
                     ],
                     'selectors' => [
-                        '{{WRAPPER}} .emu-splide-wrapper .splide__pagination__page' => 'width:{{SIZE}}{{UNIT}};',
+                        '{{WRAPPER}} .splide__pagination__page' => 'width:{{SIZE}}{{UNIT}};',
+                    ],
+                ]
+            );
+            $this->add_responsive_control(
+                'pagination_size_active',
+                [
+                    'type' => \Elementor\Controls_Manager::SLIDER,
+                    'label' => esc_html__( 'Pagination size Active', 'textdomain' ),
+                    'size_units' => [ 'px', '%', 'vh', 'vw', 'custom' ],
+                    'range' => [
+                        'px'=> [
+                            'min' => 10,
+                            'max' => 40,
+                        ],
+                    ],
+                    'selectors' => [
+                        '{{WRAPPER}} .splide__pagination__page.is-active' => 'width:{{SIZE}}{{UNIT}};',
                     ],
                 ]
             );
