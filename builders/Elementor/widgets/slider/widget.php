@@ -1330,7 +1330,7 @@ class EmuSliderElementor extends \Elementor\Widget_Base {
             $slides = $settings['list'];
 
             if(!function_exists('esc_url')){
-                esc_url($link){
+                function esc_url($link){
                     $link = filter_var($link, FILTER_SANITIZE_URL);
                     return $link;
                 }
