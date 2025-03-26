@@ -152,6 +152,6 @@
 .emu-splide-wrapper .splide__slide{backface-visibility: visible;visibility: visible!important; max-width:100%;}
 
 
-.emu-splide-wrapper .splide__pagination__page {
+/* .emu-splide-wrapper .splide__pagination__page {
     transform: none;
-}
+} */
