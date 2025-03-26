@@ -1329,8 +1329,8 @@ class EmuSliderElementor extends \Elementor\Widget_Base {
             $settings = $this->get_settings_for_display();
             $slides = $settings['list'];
 
-            if(!function_exists('esc_url')){
-                function esc_url($link){
+            if(!function_exists('eae_esc_url')){
+                function eae_esc_url($link){
                     $link = filter_var($link, FILTER_SANITIZE_URL);
                     return $link;
                 }
@@ -1440,7 +1440,7 @@ class EmuSliderElementor extends \Elementor\Widget_Base {
                                             if (!empty($slide['link']['url'])) {
 
                                                 // Gerar o HTML do link
-                                                echo '<a href="' . esc_url( $slide['link']['url'] ) . '" class="slide-link"';
+                                                echo '<a href="' . eae_esc_url( $slide['link']['url'] ) . '" class="slide-link"';
 
                                                 // Adicionar o atributo target se 'is_external' for verdadeiro
                                                 if ($slide['link']['is_external']) {
@@ -1460,7 +1460,7 @@ class EmuSliderElementor extends \Elementor\Widget_Base {
                                             <div class="emu-splide-content">
 
                                             <?php if (!empty($slide['logo'])): ?>
-                                                <img src="<?= esc_url( $slide['logo']['url']) ?>" class="emu-slide-logo">
+                                                <img src="<?= eae_esc_url( $slide['logo']['url']) ?>" class="emu-slide-logo">
                                                 <?php endif; ?>
 
                                                 
@@ -1473,7 +1473,7 @@ class EmuSliderElementor extends \Elementor\Widget_Base {
                                                     echo '<div class="emu-splide-html-wrapper">' . $slide['content'] . '</div>';
                                                 }
                                                 if (!empty($slide['button_text'])) {
-                                                    echo '<a href="' . esc_url(  $slide['button_link'] ) . '" class="emu-splide-button">' . $slide['button_text'] . '</a>';
+                                                    echo '<a href="' . eae_esc_url(  $slide['button_link'] ) . '" class="emu-splide-button">' . $slide['button_text'] . '</a>';
                                                 }
                                                 ?>
                                             </div>
