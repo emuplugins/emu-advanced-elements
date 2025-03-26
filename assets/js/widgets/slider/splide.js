@@ -1,30 +1,24 @@
 window.addEventListener('elementor/frontend/init', function () {
+    elementorFrontend.hooks.addAction('frontend/element_ready/emu_slider.default', function ($scope) {
 
-    elementorFrontend.hooks.addAction('frontend/element_ready/emu_slider.default', 
-        async function ($scope) {;
+        const id = $scope[0]?.dataset?.id;
+        const selector = `[data-id="${id}"] .splide`;
 
-            const id = $scope[0]?.dataset?.id;
-            const selector = `[data-id="${id}"] .splide`;
+        const mountSplide = () => {
+			
+            const splideElement = document.querySelector(selector + ' .splide__list > .splide__slide:first-child');
 
-            // Função para montar o Splide
-            const mountSplide = () => {
+            // Verifica se o elemento já foi inicializado
+            if (splideElement) {
 
-                const splideElement = document.querySelector(selector + ' .splide__list > .splide__slide:first-child');
+			const emuSplide = new Splide(selector);
+			emuSplide.mount();
+		
+            }
+		
+        };
 
-                if (splideElement) {
-                    const emuSplide = new Splide(selector);
-                    emuSplide.mount();
-                    observer.disconnect(); // Para de observar após o elemento ser encontrado
-                }
-            };
-
-            // Observa mudanças no DOM
-            const observer = new MutationObserver(mountSplide);
-            observer.observe(document.body, { childList: true, subtree: true });
-
-            // Tenta montar imediatamente, caso o elemento já esteja presente
-            mountSplide();
-            
-        });
-        
+        // Tenta montar o slider imediatamente, sem o observer
+        mountSplide();
+    });
 });

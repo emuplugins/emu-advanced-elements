@@ -35,8 +35,14 @@ function emuEnqueueScripts() {
         time()  // Adiciona a versão dinâmica
     );
     
-    // Script starter do Splide
-    wp_register_script('splideStarter', plugins_url('emu-advanced-elements/assets/js/widgets/slider/splide.js', EAE_PLUGIN_DIR));
+   wp_register_script(
+    'splideStarter',
+    plugins_url('emu-advanced-elements/assets/js/widgets/slider/splide.js', EAE_PLUGIN_DIR),
+    array(), // Dependências (vazio se não houver)
+    time(), // Versão (usa timestamp para evitar cache)
+    true // Carregar no footer
+);
+
 }
 
 add_action('wp_enqueue_scripts', 'emuEnqueueScripts');

@@ -29,7 +29,7 @@ class EmuSliderElementor extends \Elementor\Widget_Base {
         // ENQUEUE SCRIPTS AND STYLES
 
         public function get_script_depends(): array {
-            return ['splidePackage', 'splideStarter', 'elementor-frontend'  ];
+            return ['splidePackage', 'splideStarter' ];
         }
 
         public function get_style_depends(): array {
@@ -1322,7 +1322,9 @@ class EmuSliderElementor extends \Elementor\Widget_Base {
                         if (!empty($settings['arrows'])) $splide_config['arrows'] = filter_var($settings['arrows'], FILTER_VALIDATE_BOOLEAN);
                         if (!empty($settings['drag'])) $splide_config['drag'] = filter_var($settings['drag'], FILTER_VALIDATE_BOOLEAN);
             
-                        // Definindo os breakpoints
+                       
+						if($settings['per_page_laptop_items'] > 0 || $settings['per_page_tablet_items'] > 0 || $settings['per_page_mobile_items'] > 0)
+						// Definindo os breakpoints
                         $splide_config['breakpoints'] = array();
 
                         $desktop_breakpoint = !empty($settings['breakpointSizes_laptop']) ? intval($settings['breakpointSizes_laptop']) : 1450;
@@ -1331,10 +1333,15 @@ class EmuSliderElementor extends \Elementor\Widget_Base {
                         // Define o breakpoint desktop
                         $settings['breakpointSizes_laptop'] = !empty($settings['breakpointSizes_laptop']) ? intval($settings['breakpointSizes_laptop']) : 1450;
                         
+						// se tem mais do que 0 itens pra mostrar, ativa
+                        if ($settings['per_page_laptop_items'] > 0) {
+							
                         // coloca no array corretamente
                         $splide_config['breakpoints'][$desktop_breakpoint] = array(
                             'perPage' => $settings['per_page_laptop_items']
                         );
+							
+						}
 
 
                         // define o breakpoint tablet
@@ -1464,7 +1471,11 @@ class EmuSliderElementor extends \Elementor\Widget_Base {
             if ( settings.drag ) splideConfig.drag = Boolean( settings.drag );
 
             // Definindo os breakpoints
-            splideConfig.breakpoints = {};
+										 
+			if ( settings.per_page_laptop_items && settings.per_page_laptop_items > 0 || settings.per_page_tablet_items && settings.per_page_tablet_items > 0 || settings.per_page_mobile_items && settings.per_page_mobile_items > 0) {
+										 splideConfig.breakpoints = {};
+										 }
+            
 
             var desktopBreakpoint = settings.breakpointSizes_laptop ? settings.breakpointSizes_laptop : 1450;
 
