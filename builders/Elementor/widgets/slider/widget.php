@@ -125,13 +125,13 @@ class EmuSliderElementor extends \Elementor\Widget_Base {
             ]
             );
 
-            $repeater->add_control(
-                'bg_color',
+            $repeater->add_responsive_control(
+                'overlay_color',
             [
-                'label' => esc_html__( 'Background', 'textdomain' ),
+                'label' => esc_html__( 'Overlay Background', 'textdomain' ),
                 'type' => \Elementor\Controls_Manager::COLOR,
                 'selectors' => [
-                    '{{WRAPPER}} {{CURRENT_ITEM}}' => '--bg-color: {{VALUE}}'
+                    '{{WRAPPER}} {{CURRENT_ITEM}} .splide__slide:after' => 'content: ""; background-color: {{VALUE}}; width:100%; height:100%; position: absolute; top: 0; left: 0;'
                 ],
             ]
             );
@@ -220,6 +220,9 @@ class EmuSliderElementor extends \Elementor\Widget_Base {
                     'type' => \Elementor\Controls_Manager::TEXT,
                     'default' => esc_html__( 'List Title' , 'textdomain' ),
                     'label_block' => true,
+                    'dynamic' => [
+                        'active' => true,
+                    ],
                 ]
             );
 
@@ -230,6 +233,9 @@ class EmuSliderElementor extends \Elementor\Widget_Base {
                     'type' => \Elementor\Controls_Manager::URL,
                     'options' => [ 'url', 'is_external', 'nofollow' ],
                     'label_block' => true,
+                    'dynamic' => [
+                        'active' => true,
+                    ],
                     ]
                 );
                 
@@ -240,6 +246,9 @@ class EmuSliderElementor extends \Elementor\Widget_Base {
                     'type' => \Elementor\Controls_Manager::TEXT,
                     'default' => esc_html__( 'Click Here!' , 'textdomain' ),
                     'label_block' => true,
+                    'dynamic' => [
+                        'active' => true,
+                    ],
                 ]
             );
             $repeater->add_control(
@@ -249,6 +258,9 @@ class EmuSliderElementor extends \Elementor\Widget_Base {
                     'type' => \Elementor\Controls_Manager::URL,
                     'options' => [ 'url', 'is_external', 'nofollow' ],
                     'label_block' => true,
+                    'dynamic' => [
+                        'active' => true,
+                    ],
                 ]
             );
 
@@ -268,6 +280,9 @@ class EmuSliderElementor extends \Elementor\Widget_Base {
                 'type' => \Elementor\Controls_Manager::WYSIWYG,
                 'default' => esc_html__( 'List Content' , 'textdomain' ),
                 'show_label' => false,
+                'dynamic' => [
+                    'active' => true,
+                ],
                 ]
             );
 
