@@ -1433,7 +1433,7 @@ class EmuSliderElementor extends \Elementor\Widget_Base {
                                             if (!empty($slide['link']['url'])) {
 
                                                 // Gerar o HTML do link
-                                                echo '<a href="' . $slide['link']['url'] . '" class="slide-link"';
+                                                echo '<a href="' . esc_url( $slide['link']['url'] ) . '" class="slide-link"';
 
                                                 // Adicionar o atributo target se 'is_external' for verdadeiro
                                                 if ($slide['link']['is_external']) {
@@ -1453,7 +1453,7 @@ class EmuSliderElementor extends \Elementor\Widget_Base {
                                             <div class="emu-splide-content">
 
                                             <?php if (!empty($slide['logo'])): ?>
-                                                <img src="<?= $slide['logo']['url'];?>" class="emu-slide-logo">
+                                                <img src="<?= esc_url( $slide['logo']['url']); ?>" class="emu-slide-logo">
                                                 <?php endif; ?>
 
                                                 
@@ -1466,7 +1466,7 @@ class EmuSliderElementor extends \Elementor\Widget_Base {
                                                     echo '<div class="emu-splide-html-wrapper">' . $slide['content'] . '</div>';
                                                 }
                                                 if (!empty($slide['button_text'])) {
-                                                    echo '<a href="' . $slide['button_link'] . '" class="emu-splide-button">' . $slide['button_text'] . '</a>';
+                                                    echo '<a href="' . esc_url(  $slide['button_link'] ) . '" class="emu-splide-button">' . $slide['button_text'] . '</a>';
                                                 }
                                                 ?>
                                             </div>
