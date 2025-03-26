@@ -1416,7 +1416,7 @@ class EmuSliderElementor extends \Elementor\Widget_Base {
                                         <div class="emu-slide-content-wrapper <?php echo 'elementor-repeater-item-' . esc_attr($slide['_id']); ?>">
         
                                         <div class="emu-slide-background-img-wrapper"><picture>
-                                                <?php if (!empty($slide['bg_mobile']['url']) && is_string($slide['bg_mobile']['url']) ): ?>
+                                                <?php if (!empty($slide['bg_mobile']['url']) && $slide['bg_mobile']['url'] ): ?>
                                                     <source media="(max-width: 767px)" srcset="<?= $slide['bg_mobile']['url']; ?>">
                                                 <?php endif; ?>
         
@@ -1431,7 +1431,7 @@ class EmuSliderElementor extends \Elementor\Widget_Base {
         
                                             <?php
                                             // Verificando se o link está definido
-                                            if (!empty($slide['link']['url'] && is_string($slide['link']['url']) ) ) {
+                                            if (!empty($slide['link']['url'] && $slide['link']['url'] ) ) {
 
                                                 // Gerar o HTML do link
                                                 echo '<a href="' . $slide['link']['url'] . '" class="slide-link"';
@@ -1453,7 +1453,7 @@ class EmuSliderElementor extends \Elementor\Widget_Base {
                                             <div class="emu-splide-content-session">
                                             <div class="emu-splide-content">
 
-                                            <?php if (!empty($slide['logo']) && is_string($slide['logo']['url']) ): ?>
+                                            <?php if (!empty($slide['logo']) ): ?>
                                                 <img src="<?= $slide['logo']['url'] ?>" class="emu-slide-logo">
                                                 <?php endif; ?>
 
@@ -1466,8 +1466,8 @@ class EmuSliderElementor extends \Elementor\Widget_Base {
                                                 if (!empty($slide['content'])) {
                                                     echo '<div class="emu-splide-html-wrapper">' . $slide['content'] . '</div>';
                                                 }
-                                                if (!empty($slide['button_text'])) ) {
-                                                    echo '<a href="' . $slide['button_link'] . '" class="emu-splide-button">' . $slide['button_text'] . '</a>';
+                                                if (!empty($slide['button_text'])) {
+                                                    echo '<a href="' . $slide['button_link']['url'] . '" class="emu-splide-button">' . $slide['button_text'] . '</a>';
                                                 }
                                                 ?>
                                             </div>
