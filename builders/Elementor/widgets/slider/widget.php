@@ -1329,6 +1329,13 @@ class EmuSliderElementor extends \Elementor\Widget_Base {
             $settings = $this->get_settings_for_display();
             $slides = $settings['list'];
 
+            if(!function_exists('esc_url')){
+                esc_url($link){
+                    $link = filter_var($link, FILTER_SANITIZE_URL);
+                    return $link;
+                }
+            }
+
             if ($settings) : ?> 
                 <!-- Vamos montar o slider -->
                 <div class="emu-splide-wrapper">
@@ -1453,7 +1460,7 @@ class EmuSliderElementor extends \Elementor\Widget_Base {
                                             <div class="emu-splide-content">
 
                                             <?php if (!empty($slide['logo'])): ?>
-                                                <img src="<?= esc_url( $slide['logo']['url']); ?>" class="emu-slide-logo">
+                                                <img src="<?= esc_url( $slide['logo']['url']) ?>" class="emu-slide-logo">
                                                 <?php endif; ?>
 
                                                 
