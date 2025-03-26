@@ -153,6 +153,5 @@
 
 
 .emu-splide-wrapper .splide__pagination__page {
-    transform: none!important;
     transition:all.3s!important
 }
