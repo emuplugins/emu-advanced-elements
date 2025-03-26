@@ -1238,7 +1238,7 @@ class EmuSliderElementor extends \Elementor\Widget_Base {
                     'type' => \Elementor\Controls_Manager::SLIDER,
                     'label' => esc_html__( 'Pagination size', 'textdomain' ),
                     'range' => [
-                        'px'=> [
+                        'unitless' => [
                             'min' => -10,
                             'max' => 10,
                         ],
@@ -1246,16 +1246,19 @@ class EmuSliderElementor extends \Elementor\Widget_Base {
                     'selectors' => [
                         '{{WRAPPER}} .splide__pagination__page' => 'transform: scale({{SIZE}});',
                     ],
-                    'default' => 0
+                    'default' => [
+                        'size' => 1, // Valor padrão para evitar comportamento inesperado
+                    ],
                 ]
             );
+            
             $this->add_responsive_control(
                 'pagination_size_active',
                 [
                     'type' => \Elementor\Controls_Manager::SLIDER,
                     'label' => esc_html__( 'Pagination size Active', 'textdomain' ),
                     'range' => [
-                        'px'=> [
+                        'unitless' => [
                             'min' => -10,
                             'max' => 10,
                         ],
@@ -1263,7 +1266,9 @@ class EmuSliderElementor extends \Elementor\Widget_Base {
                     'selectors' => [
                         '{{WRAPPER}} .splide__pagination__page.is-active' => 'transform: scale({{SIZE}});',
                     ],
-                    'default' => 0
+                    'default' => [
+                        'size' => 1,
+                    ],
                 ]
             );
             
