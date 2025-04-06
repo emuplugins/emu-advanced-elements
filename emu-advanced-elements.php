@@ -3,7 +3,7 @@
  * Plugin Name: Emu Advanced Elements
  * Plugin URI:  https://www.exemplo.com.br/emu-advanced-elements
  * Description: Este plugin adiciona elementos avançados ao seu site, permitindo uma personalização ainda mais completa com widgets e shortcodes customizados.
- * Version:     1.0.0
+ * Version:     1.0.1
  * Author:      Seu Nome
  * Author URI:  https://www.seunome.com.br
  * Text Domain: emu-advanced-elements
